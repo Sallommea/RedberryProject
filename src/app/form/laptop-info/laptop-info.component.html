@@ -1,0 +1,165 @@
+<div>
+  <form action="">
+    <div
+      class="imgUploadContainer"
+      appDragAndDrop
+      (files)="filesDropped($event)"
+    >
+      <!-- <div *ngFor="let file of files">
+        <img *ngIf="file" [src]="file.url" alt="" />
+      </div> -->
+      <img *ngIf="files[0]" [src]="files[0].url" alt="" />
+
+      <div *ngIf="showbutton" class="imgWrapper">
+        <p>ჩააგდე ან ატვირთე ლეპტოპის ფოტო</p>
+      </div>
+      <div *ngIf="showbutton" class="upload_button">
+        <input
+          type="file"
+          name="file"
+          id="file"
+          (change)="onChange($event.target.files)"
+        />
+        <label class="submitBtn" for="file">ატვირთე</label>
+      </div>
+    </div>
+
+    <div *ngIf="showbutton === false" class="laptop_info">
+      <div class="img_name_size">
+        <img
+          src="../../../assets/Vector.png"
+          class="logo_imgName_imgSize vector-img"
+        />
+
+        <p class="logo_imgName_imgSize image_name">{{ imageName }},</p>
+        <p class="image_name image_size">{{ imageSize }}</p>
+      </div>
+      <div class="upload">
+        <input
+          class="try"
+          type="file"
+          name="file"
+          id="file"
+          (change)="onChange($event.target.files)"
+        />
+        <label class="upload_bottom" for="file">თავიდან ატვირთე</label>
+      </div>
+    </div>
+    <div class="laptop_info">
+      <div class="laptop_name">
+        <label>ლეპტოპის სახელი</label>
+        <input
+          type="text"
+          class="form-control shadow-none"
+          placeholder="HP"
+          aria-label="Laptop name"
+        />
+        <p class="hint">ლათინური ასოები, ციფრები, !@#$%^&*()_+=</p>
+      </div>
+      <div class="laptop_name">
+        <select
+          class="form-select form-select-sm shadow-none"
+          aria-label=".form-select-sm example"
+        >
+          <option selected>ლეპტოპის ბრენდი</option>
+          <option value="1" *ngFor="let brand of brands">
+            {{ brand.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <hr />
+    <div class="laptop_CPU_Info">
+      <div class="laptop_CPU">
+        <select
+          class="form-select form-select-sm shadow-none"
+          aria-label=".form-select-sm example"
+        >
+          <option selected>CPU</option>
+          <option value="1" *ngFor="let cpu of cpus">
+            {{ cpu.name }}
+          </option>
+        </select>
+      </div>
+      <div class="laptop_CPU">
+        <label>CPU-ს ბირთვი</label>
+        <input
+          type="number"
+          class="form-control shadow-none"
+          placeholder="14"
+          aria-label="CPU core"
+        />
+        <p class="hint">მხოლოდ ციფრები</p>
+      </div>
+      <div class="laptop_CPU">
+        <label>CPU-ს ნაკადი</label>
+        <input
+          type="number"
+          class="form-control shadow-none"
+          placeholder="365"
+          aria-label="CPU"
+        />
+        <p class="hint">მხოლოდ ციფრები</p>
+      </div>
+    </div>
+    <div class="laptop_info">
+      <div class="laptop_name">
+        <label>ლეპტოპის RAM (GB)</label>
+        <input
+          type="number"
+          class="form-control shadow-none"
+          placeholder="16"
+          aria-label="Laptop name"
+        />
+        <p class="hint">მხოლოდ ციფრები</p>
+      </div>
+      <div class="laptop_memory">
+        <label> მეხსიერების ტიპი</label>
+        <div class="radio_buttons">
+          <input type="radio" id="ssd" value="SSD" name="memory_type" />
+          <label for="ssd" class="memory_type">SSD</label>
+          <input type="radio" id="hdd" value="HDD" name="memory_type" />
+          <label for="hdd" class="memory_type">HDD</label>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="laptop_info purchase_info">
+      <div class="laptop_name">
+        <label>შეძენის რიცხვი (არჩევითი)</label>
+        <input
+          type="text"
+          class="form-control shadow-none"
+          placeholder="დდ / თთ / წწწწ"
+          aria-label="purschase date"
+          mask="00/00/0000"
+        />
+      </div>
+      <div class="laptop_name laptop_price">
+        <label>ლეპტოპის ფასი</label>
+        <input
+          type="number"
+          class="form-control shadow-none"
+          placeholder="0000"
+          aria-label="Laptop price"
+        />
+        <p class="hint">მხოლოდ ციფრები</p>
+      </div>
+    </div>
+    <div class="laptop_info">
+      <div class="laptop_memory">
+        <label> ლეპტოპის მდგომარეობა</label>
+        <div class="radio_buttons">
+          <input type="radio" id="new" value="new" name="condition" />
+          <label for="new" class="memory_type">ახალი</label>
+          <input type="radio" id="old" value="old" name="condition" />
+          <label for="old" class="memory_type">მეორადი</label>
+        </div>
+      </div>
+    </div>
+    <div class="buttons_row">
+      <button class="go_back_button" (click)="previousPage()">უკან</button>
+      <button class="submit_button">დამახსოვრება</button>
+    </div>
+  </form>
+</div>

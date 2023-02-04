@@ -1,0 +1,139 @@
+<div class="container">
+  <form [formGroup]="employeeInfoForm" (ngSubmit)="onSubmit()">
+    <div class="row g-3">
+      <div
+        class="col inpName"
+        [ngClass]="{
+          invalid: (firstName.invalid && firstName.touched)|| firstName.errors?.['onlyGeorgianLetters']|| !firstNameValid
+        }"
+      >
+        <label>სახელი</label>
+        <input
+          type="text"
+          class="form-control shadow-none"
+          placeholder="გრიშა"
+          aria-label="First name"
+          formControlName="firstName"
+          (keyup)="turntrue($event)"
+        />
+        <p
+          class="hint"
+          *ngIf="!firstName.errors?.['onlyGeorgianLetters'] || (firstName.errors?.['onlyGeorgianLetters'] && firstName.errors?.['required'])"
+        >
+          მინიმუმ 2 სიმბოლო, ქართული ასოები
+        </p>
+        <p
+          class="hint"
+          *ngIf="firstName.errors?.['onlyGeorgianLetters'] && !firstName.errors?.['required']"
+        >
+          გამოიყენე ქართული ასოები
+        </p>
+      </div>
+
+      <div
+        class="col inpName"
+        [ngClass]="{
+          invalid: (lastName && lastName.invalid && lastName.touched)|| lastName.errors?.['onlyGeorgianLetters']
+        }"
+      >
+        <label>გვარი</label>
+        <input
+          type="text"
+          class="form-control shadow-none try"
+          placeholder="ბაგრატიონი"
+          aria-label="Last name"
+          formControlName="lastName"
+        />
+        <p
+          class="hint"
+          *ngIf="!lastName.errors?.['onlyGeorgianLetters'] || (lastName.errors?.['onlyGeorgianLetters'] && lastName.errors?.['required'])"
+        >
+          მინიმუმ 2 სიმბოლო, ქართული ასოები
+        </p>
+        <p
+          class="hint"
+          *ngIf="lastName.errors?.['onlyGeorgianLetters'] && !lastName.errors?.['required']"
+        >
+          გამოიყენე ქართული ასოები
+        </p>
+      </div>
+    </div>
+    <div
+      class="row g-3 select"
+      [ngClass]="{
+        invalid: (team.invalid && team.touched) || team.value === 'თიმი'
+      }"
+    >
+      <select
+        class="form-select form-select-sm shadow-none"
+        aria-label=".form-select-sm example"
+        formControlName="team"
+      >
+        <option selected>თიმი</option>
+        <option value="1" *ngFor="let team of teams">{{ team.name }}</option>
+      </select>
+    </div>
+
+    <div
+      class="row g-3 select"
+      [ngClass]="{
+        invalid:
+          (position.invalid && position.touched) || position.value === 'პოზიცია'
+      }"
+    >
+      <select
+        class="form-select form-select-sm shadow-none"
+        aria-label=".form-select-sm example"
+        formControlName="position"
+      >
+        <option selected>პოზიცია</option>
+        <option value="1" *ngFor="let position of positions">
+          {{ position.name }}
+        </option>
+      </select>
+    </div>
+    <div class="row g-3">
+      <div
+        class="col inpName"
+        [ngClass]="{
+          invalid: email && email.invalid && email.touched
+        }"
+      >
+        <label>მეილი</label>
+        <input
+          type="text"
+          class="form-control shadow-none"
+          placeholder="grish666@redberry.ge"
+          aria-label="Last name"
+          formControlName="email"
+        />
+        <p class="hint">უნდა მთავრდებოდეს @redberry.ge</p>
+      </div>
+    </div>
+    <div
+      class="row g-3 select"
+      [ngClass]="{
+        invalid: phoneNum && phoneNum.invalid && phoneNum.touched
+      }"
+    >
+      <div class="col inpName">
+        <label>ტელეფონის ნომერი</label>
+        <input
+          type="text"
+          class="form-control shadow-none"
+          placeholder="+995 598 00 07 01"
+          aria-label="Last name"
+          formControlName="phoneNum"
+        />
+        <p class="hint">უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს</p>
+      </div>
+    </div>
+    <div class="row g-3 center">
+      <div class="col inpName btnWrap">
+        <button type="submit" (click)="nextPage()" class="submitBtn">
+          შემდეგი
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
