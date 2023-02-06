@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { GeneralsService } from 'src/app/services/generals.service';
 import { Brands, CPUs } from 'src/app/models/team.model';
 import { Subscription } from 'rxjs';
+import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-laptop-info',
   templateUrl: './laptop-info.component.html',
@@ -38,6 +40,7 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
       })
     );
   }
+
   filesDropped(files: FileHandle[]): void {
     this.files = files;
     console.log(files[0].file);
@@ -48,6 +51,7 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
     this.imageName = files[0].file.name;
     console.log(this.imageName, this.imageSize);
   }
+
   onChange(img: File[]) {
     this.files = [];
     let validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
@@ -69,8 +73,63 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
     this.showbutton = false;
   }
 
+  laptopInfoForm: FormGroup = new FormGroup({
+    laptopName: new FormControl(null, [
+      Validators.required,
+      Validators.pattern('^[A-Za-z0-9!@#$%^&*()_+=]*$'),
+    ]),
+    laptopImage: new FormControl(null, [Validators.required]),
+    laptopBrandId: new FormControl(null, [Validators.required]),
+    laptopCPU: new FormControl(null, [Validators.required]),
+    laptopCPUCores: new FormControl(null, [Validators.required]),
+    LaptopCpuThreads: new FormControl(null, [Validators.required]),
+    LaptopRam: new FormControl(null, [Validators.required]),
+    LaptopHardDriveType: new FormControl(null, [Validators.required]),
+    LaptopState: new FormControl(null, [Validators.required]),
+    LaptopPurchaseDate: new FormControl(null),
+    LaptopPrice: new FormControl(null, [Validators.required]),
+  });
+
   previousPage() {
     this.router.navigateByUrl(`forms`);
+  }
+  onSubmit() {
+    console.log(this.laptopInfoForm);
+  }
+
+  get laptopCPU() {
+    return this.laptopInfoForm.get('laptopCPU');
+  }
+
+  get laptopName() {
+    return this.laptopInfoForm.get('laptopName');
+  }
+
+  get laptopBrandId() {
+    return this.laptopInfoForm.get('laptopBrandId');
+  }
+
+  get laptopCPUCores() {
+    return this.laptopInfoForm.get('laptopCPUCores');
+  }
+
+  get LaptopCpuThreads() {
+    return this.laptopInfoForm.get('LaptopCpuThreads');
+  }
+  get LaptopRam() {
+    return this.laptopInfoForm.get('LaptopRam');
+  }
+  get LaptopHardDriveType() {
+    return this.laptopInfoForm.get('LaptopHardDriveType');
+  }
+  get LaptopState() {
+    return this.laptopInfoForm.get('LaptopState');
+  }
+  get LaptopPurchaseDate() {
+    return this.laptopInfoForm.get('LaptopPurchaseDate');
+  }
+  get LaptopPrice() {
+    return this.laptopInfoForm.get('LaptopPrice');
   }
 
   ngOnDestroy(): void {

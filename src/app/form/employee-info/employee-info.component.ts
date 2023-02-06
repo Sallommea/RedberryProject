@@ -18,6 +18,7 @@ import { Subscription } from 'rxjs';
 })
 export class EmployeeInfoComponent implements OnInit, OnDestroy {
   @Output() next = new EventEmitter();
+
   constructor(
     private router: Router,
     private generalsService: GeneralsService
@@ -27,6 +28,12 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
   positions: Position[] = [];
   subs: Subscription[] = [];
   firstNameValid = true;
+  lastNameValid = true;
+  teamsValid = true;
+  positionsValid = true;
+  emailValid = true;
+  phoneNumValid = true;
+
   ngOnInit(): void {
     this.subs.push(
       this.generalsService.getAllTeams().subscribe((res) => {
@@ -59,25 +66,66 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
   });
 
   nextPage() {
-    // this.router.navigateByUrl(`forms/laptop`);
-
     if (this.firstName.invalid) {
       this.firstNameValid = false;
+    }
+    if (this.lastName.invalid) {
+      this.lastNameValid = false;
+    }
+    if (this.email.invalid) {
+      this.emailValid = false;
+    }
+    if (this.phoneNum.invalid) {
+      this.phoneNumValid = false;
+    }
+    if (this.team.invalid) {
+      this.teamsValid = false;
+    }
+    if (this.position.invalid) {
+      this.positionsValid = false;
+    }
+    if (this.employeeInfoForm.invalid) {
       return;
     }
-    console.log(this.employeeInfoForm.status);
+
     console.log(this.employeeInfoForm);
     console.log(this.firstName.status);
+
+    this.router.navigateByUrl(`forms/laptop`);
   }
   onSubmit() {
-    console.log('salome');
+    console.log(this.employeeInfoForm.value.team);
   }
-  turntrue(event: Event) {
+
+  // turning validators true when typing starts
+
+  turnValidFirstName(event: Event) {
     this.firstNameValid = true;
   }
+  turnValidLastName() {
+    this.lastNameValid = true;
+  }
+
+  turnValidEmail() {
+    this.emailValid = true;
+  }
+
+  turnValidPhoneNum() {
+    this.phoneNumValid = true;
+  }
+
+  turnValidTeam() {
+    this.teamsValid = true;
+  }
+  turnValidPosition() {
+    this.positionsValid = true;
+  }
+
   ngOnDestroy(): void {
     this.subs.forEach((x) => x.unsubscribe());
   }
+
+  // getting formgroup controls
 
   get firstName() {
     return this.employeeInfoForm.get('firstName');
@@ -103,6 +151,7 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
   }
 
   // custom validators
+
   onlyGeorgianLetters(control: FormControl) {
     const regex = new RegExp('[Ⴀ-\u10fe -. \u1c90-\u1cbf]+$');
     if (control.value != null && !regex.test(control.value)) {

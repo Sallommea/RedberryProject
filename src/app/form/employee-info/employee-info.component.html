@@ -14,7 +14,7 @@
           placeholder="გრიშა"
           aria-label="First name"
           formControlName="firstName"
-          (keyup)="turntrue($event)"
+          (keyup)="turnValidFirstName($event)"
         />
         <p
           class="hint"
@@ -33,7 +33,7 @@
       <div
         class="col inpName"
         [ngClass]="{
-          invalid: (lastName && lastName.invalid && lastName.touched)|| lastName.errors?.['onlyGeorgianLetters']
+          invalid: (lastName && lastName.invalid && lastName.touched)|| lastName.errors?.['onlyGeorgianLetters'] || !lastNameValid
         }"
       >
         <label>გვარი</label>
@@ -43,6 +43,7 @@
           placeholder="ბაგრატიონი"
           aria-label="Last name"
           formControlName="lastName"
+          (keyup)="turnValidLastName()"
         />
         <p
           class="hint"
@@ -61,33 +62,38 @@
     <div
       class="row g-3 select"
       [ngClass]="{
-        invalid: (team.invalid && team.touched) || team.value === 'თიმი'
+        invalid: (team.invalid && team.touched) || !teamsValid
       }"
     >
       <select
         class="form-select form-select-sm shadow-none"
         aria-label=".form-select-sm example"
         formControlName="team"
+        (click)="turnValidTeam()"
+        placeholder="Select Username"
+        value=""
       >
-        <option selected>თიმი</option>
-        <option value="1" *ngFor="let team of teams">{{ team.name }}</option>
+        <option value="null" disabled>თიმი</option>
+        <option *ngFor="let team of teams" [value]="team.id">
+          {{ team.name }}
+        </option>
       </select>
     </div>
 
     <div
       class="row g-3 select"
       [ngClass]="{
-        invalid:
-          (position.invalid && position.touched) || position.value === 'პოზიცია'
+        invalid: (position.invalid && position.touched) || !positionsValid
       }"
     >
       <select
         class="form-select form-select-sm shadow-none"
         aria-label=".form-select-sm example"
         formControlName="position"
+        (click)="turnValidPosition()"
       >
-        <option selected>პოზიცია</option>
-        <option value="1" *ngFor="let position of positions">
+        <option value="null" disabled>პოზიცია</option>
+        <option *ngFor="let position of positions" [value]="position.id">
           {{ position.name }}
         </option>
       </select>
@@ -96,7 +102,7 @@
       <div
         class="col inpName"
         [ngClass]="{
-          invalid: email && email.invalid && email.touched
+          invalid: (email && email.invalid && email.touched) || !emailValid
         }"
       >
         <label>მეილი</label>
@@ -106,6 +112,7 @@
           placeholder="grish666@redberry.ge"
           aria-label="Last name"
           formControlName="email"
+          (keyup)="turnValidEmail()"
         />
         <p class="hint">უნდა მთავრდებოდეს @redberry.ge</p>
       </div>
@@ -113,7 +120,8 @@
     <div
       class="row g-3 select"
       [ngClass]="{
-        invalid: phoneNum && phoneNum.invalid && phoneNum.touched
+        invalid:
+          (phoneNum && phoneNum.invalid && phoneNum.touched) || !phoneNumValid
       }"
     >
       <div class="col inpName">
@@ -124,6 +132,7 @@
           placeholder="+995 598 00 07 01"
           aria-label="Last name"
           formControlName="phoneNum"
+          (keyup)="turnValidPhoneNum()"
         />
         <p class="hint">უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს</p>
       </div>

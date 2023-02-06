@@ -1,9 +1,11 @@
 <div>
-  <form action="">
+  <form [formGroup]="laptopInfoForm" (ngSubmit)="onSubmit()">
     <div
       class="imgUploadContainer"
       appDragAndDrop
       (files)="filesDropped($event)"
+      [ngClass]="{ noBorder: !showbutton }"
+      [ngClass]="{}"
     >
       <!-- <div *ngFor="let file of files">
         <img *ngIf="file" [src]="file.url" alt="" />
@@ -19,6 +21,7 @@
           name="file"
           id="file"
           (change)="onChange($event.target.files)"
+          formControlName="laptopImage"
         />
         <label class="submitBtn" for="file">ატვირთე</label>
       </div>
@@ -41,6 +44,7 @@
           name="file"
           id="file"
           (change)="onChange($event.target.files)"
+          formControlName="laptopImage"
         />
         <label class="upload_bottom" for="file">თავიდან ატვირთე</label>
       </div>
@@ -53,15 +57,24 @@
           class="form-control shadow-none"
           placeholder="HP"
           aria-label="Laptop name"
+          formControlName="laptopName"
         />
         <p class="hint">ლათინური ასოები, ციფრები, !@#$%^&*()_+=</p>
       </div>
-      <div class="laptop_name">
+      <div
+        class="laptop_name"
+        [ngClass]="{
+          invalid:
+            (laptopBrandId.invalid && laptopBrandId.touched) ||
+            laptopBrandId.value === 'CPU'
+        }"
+      >
         <select
           class="form-select form-select-sm shadow-none"
           aria-label=".form-select-sm example"
+          formControlName="laptopBrandId"
         >
-          <option selected>ლეპტოპის ბრენდი</option>
+          <option value="null" disabled>ლეპტოპის ბრენდი</option>
           <option value="1" *ngFor="let brand of brands">
             {{ brand.name }}
           </option>
@@ -70,12 +83,20 @@
     </div>
     <hr />
     <div class="laptop_CPU_Info">
-      <div class="laptop_CPU">
+      <div
+        class="laptop_CPU"
+        [ngClass]="{
+          invalid:
+            (laptopCPU.invalid && laptopCPU.touched) ||
+            (laptopCPU.value == 'null' && laptopCPU.touched)
+        }"
+      >
         <select
           class="form-select form-select-sm shadow-none"
           aria-label=".form-select-sm example"
+          formControlName="laptopCPU"
         >
-          <option selected>CPU</option>
+          <option disabled value="null">CPU</option>
           <option value="1" *ngFor="let cpu of cpus">
             {{ cpu.name }}
           </option>
@@ -88,6 +109,7 @@
           class="form-control shadow-none"
           placeholder="14"
           aria-label="CPU core"
+          formControlName="laptopCPUCores"
         />
         <p class="hint">მხოლოდ ციფრები</p>
       </div>
@@ -98,6 +120,7 @@
           class="form-control shadow-none"
           placeholder="365"
           aria-label="CPU"
+          formControlName="LaptopCpuThreads"
         />
         <p class="hint">მხოლოდ ციფრები</p>
       </div>
@@ -110,15 +133,28 @@
           class="form-control shadow-none"
           placeholder="16"
           aria-label="Laptop name"
+          formControlName="LaptopRam"
         />
         <p class="hint">მხოლოდ ციფრები</p>
       </div>
       <div class="laptop_memory">
         <label> მეხსიერების ტიპი</label>
         <div class="radio_buttons">
-          <input type="radio" id="ssd" value="SSD" name="memory_type" />
+          <input
+            type="radio"
+            id="ssd"
+            value="SSD"
+            name="LaptopHardDriveType"
+            formControlName="LaptopHardDriveType"
+          />
           <label for="ssd" class="memory_type">SSD</label>
-          <input type="radio" id="hdd" value="HDD" name="memory_type" />
+          <input
+            type="radio"
+            id="hdd"
+            value="HDD"
+            name="LaptopHardDriveType"
+            formControlName="LaptopHardDriveType"
+          />
           <label for="hdd" class="memory_type">HDD</label>
         </div>
       </div>
@@ -133,6 +169,7 @@
           placeholder="დდ / თთ / წწწწ"
           aria-label="purschase date"
           mask="00/00/0000"
+          formControlName="LaptopPurchaseDate"
         />
       </div>
       <div class="laptop_name laptop_price">
@@ -142,6 +179,7 @@
           class="form-control shadow-none"
           placeholder="0000"
           aria-label="Laptop price"
+          formControlName="LaptopPrice"
         />
         <p class="hint">მხოლოდ ციფრები</p>
       </div>
@@ -150,16 +188,28 @@
       <div class="laptop_memory">
         <label> ლეპტოპის მდგომარეობა</label>
         <div class="radio_buttons">
-          <input type="radio" id="new" value="new" name="condition" />
+          <input
+            type="radio"
+            id="new"
+            value="ახალი"
+            name="LaptopState"
+            formControlName="LaptopState"
+          />
           <label for="new" class="memory_type">ახალი</label>
-          <input type="radio" id="old" value="old" name="condition" />
+          <input
+            type="radio"
+            id="old"
+            value="ძველი"
+            name="LaptopState"
+            formControlName="LaptopState"
+          />
           <label for="old" class="memory_type">მეორადი</label>
         </div>
       </div>
     </div>
     <div class="buttons_row">
       <button class="go_back_button" (click)="previousPage()">უკან</button>
-      <button class="submit_button">დამახსოვრება</button>
+      <button class="submit_button" type="submit">დამახსოვრება</button>
     </div>
   </form>
 </div>

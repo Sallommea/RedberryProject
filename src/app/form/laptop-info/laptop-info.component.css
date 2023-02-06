@@ -77,6 +77,9 @@ label {
   justify-content: center;
   align-items: center;
 }
+.noBorder {
+  border: white;
+}
 .imgUploadContainer img {
   height: 400px;
   width: 700px;
@@ -328,4 +331,23 @@ hr {
   font-style: normal;
   font-size: 16px;
   line-height: 10px;
+}
+
+.invalid label {
+  color: #e52f2f;
+}
+.invalid input {
+  border: 1.8px solid #e52f2f;
+}
+
+.invalid select {
+  border: 1.8px solid #e52f2f;
+}
+.invalid p {
+  color: #e52f2f;
+}
+
+.invalid input:active,
+.invalid input:focus {
+  border-color: #e52f2f;
 }
