@@ -84,14 +84,16 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
     if (this.position.invalid) {
       this.positionsValid = false;
     }
-    if (this.employeeInfoForm.invalid) {
-      return;
-    }
+    // if (this.employeeInfoForm.invalid) {
+    //   return;
+    // }
 
     console.log(this.employeeInfoForm);
     console.log(this.firstName.status);
 
-    this.router.navigateByUrl(`forms/laptop`);
+    this.router.navigate(['/forms/laptop'], {
+      state: { data: 'some data' },
+    });
   }
   onSubmit() {
     console.log(this.employeeInfoForm.value.team);

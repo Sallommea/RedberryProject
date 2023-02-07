@@ -26,6 +26,11 @@ input:focus {
 .upload_button label {
   font-weight: 300;
 }
+.upload_button {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
 select {
   height: 45px;
   background-color: #ebebeb;
@@ -106,6 +111,8 @@ button {
   /* ლურჯი/700 */
 
   color: #4386a9;
+
+  margin-top: 5px;
 }
 
 input[type="file"] {
@@ -336,6 +343,9 @@ hr {
 .invalid label {
   color: #e52f2f;
 }
+.invalidLabel {
+  color: #e52f2f;
+}
 .invalid input {
   border: 1.8px solid #e52f2f;
 }
@@ -350,4 +360,28 @@ hr {
 .invalid input:active,
 .invalid input:focus {
   border-color: #e52f2f;
+}
+
+.invalidCon {
+  background: #fff1f1;
+  border: 2px dashed rgba(229, 47, 47, 1);
+}
+.warning-image img {
+  height: auto;
+  max-width: 10%;
+  transform: scale(0.5);
+}
+.warning-image {
+  display: flex;
+  justify-content: center;
+}
+
+.invalidParagraph {
+  font-weight: 600;
+  color: #e52f2f;
+}
+label img {
+  height: auto;
+  transform: scale(0.6);
+  margin-bottom: 10px;
 }

@@ -5,14 +5,20 @@
       appDragAndDrop
       (files)="filesDropped($event)"
       [ngClass]="{ noBorder: !showbutton }"
-      [ngClass]="{}"
+      [ngClass]="{ invalidCon: !laptopImageValid }"
     >
       <!-- <div *ngFor="let file of files">
         <img *ngIf="file" [src]="file.url" alt="" />
       </div> -->
       <img *ngIf="files[0]" [src]="files[0].url" alt="" />
-
-      <div *ngIf="showbutton" class="imgWrapper">
+      <div class="warning-image" *ngIf="!laptopImageValid">
+        <img src="../../../assets/uploadWarning.png" alt="" />
+      </div>
+      <div
+        *ngIf="showbutton"
+        class="imgWrapper"
+        [ngClass]="{ invalidParagraph: !laptopImageValid }"
+      >
         <p>ჩააგდე ან ატვირთე ლეპტოპის ფოტო</p>
       </div>
       <div *ngIf="showbutton" class="upload_button">
@@ -27,7 +33,7 @@
       </div>
     </div>
 
-    <div *ngIf="showbutton === false" class="laptop_info">
+    <div *ngIf="!showbutton" class="laptop_info">
       <div class="img_name_size">
         <img
           src="../../../assets/Vector.png"
@@ -50,7 +56,13 @@
       </div>
     </div>
     <div class="laptop_info">
-      <div class="laptop_name">
+      <div
+        class="laptop_name"
+        [ngClass]="{
+          invalid:
+            (laptopName.invalid && laptopName.touched) || laptopName.errors?.['pattern'] || !laptopNameValid
+        }"
+      >
         <label>ლეპტოპის სახელი</label>
         <input
           type="text"
@@ -58,6 +70,7 @@
           placeholder="HP"
           aria-label="Laptop name"
           formControlName="laptopName"
+          (keyup)="turnValidLaptopName()"
         />
         <p class="hint">ლათინური ასოები, ციფრები, !@#$%^&*()_+=</p>
       </div>
@@ -66,13 +79,14 @@
         [ngClass]="{
           invalid:
             (laptopBrandId.invalid && laptopBrandId.touched) ||
-            laptopBrandId.value === 'CPU'
+            !laptopBrandIdValid
         }"
       >
         <select
           class="form-select form-select-sm shadow-none"
           aria-label=".form-select-sm example"
           formControlName="laptopBrandId"
+          (click)="turnValidlaptopBrandId()"
         >
           <option value="null" disabled>ლეპტოპის ბრენდი</option>
           <option value="1" *ngFor="let brand of brands">
@@ -86,15 +100,14 @@
       <div
         class="laptop_CPU"
         [ngClass]="{
-          invalid:
-            (laptopCPU.invalid && laptopCPU.touched) ||
-            (laptopCPU.value == 'null' && laptopCPU.touched)
+          invalid: (laptopCPU.invalid && laptopCPU.touched) || !laptopCpuValid
         }"
       >
         <select
           class="form-select form-select-sm shadow-none"
           aria-label=".form-select-sm example"
           formControlName="laptopCPU"
+          (click)="turnValidlaptopCpu()"
         >
           <option disabled value="null">CPU</option>
           <option value="1" *ngFor="let cpu of cpus">
@@ -102,7 +115,7 @@
           </option>
         </select>
       </div>
-      <div class="laptop_CPU">
+      <div class="laptop_CPU" [ngClass]="{ invalid: !laptopCPUCoresValid }">
         <label>CPU-ს ბირთვი</label>
         <input
           type="number"
@@ -110,10 +123,11 @@
           placeholder="14"
           aria-label="CPU core"
           formControlName="laptopCPUCores"
+          (keyup)="turnValidlaptopCPUCores()"
         />
         <p class="hint">მხოლოდ ციფრები</p>
       </div>
-      <div class="laptop_CPU">
+      <div class="laptop_CPU" [ngClass]="{ invalid: !laptopCpuThreadsValid }">
         <label>CPU-ს ნაკადი</label>
         <input
           type="number"
@@ -121,12 +135,13 @@
           placeholder="365"
           aria-label="CPU"
           formControlName="LaptopCpuThreads"
+          (keyup)="turnValidlaptopCpuThreads()"
         />
         <p class="hint">მხოლოდ ციფრები</p>
       </div>
     </div>
     <div class="laptop_info">
-      <div class="laptop_name">
+      <div class="laptop_name" [ngClass]="{ invalid: !laptopRamValid }">
         <label>ლეპტოპის RAM (GB)</label>
         <input
           type="number"
@@ -134,11 +149,18 @@
           placeholder="16"
           aria-label="Laptop name"
           formControlName="LaptopRam"
+          (keyup)="turnValidLaptopRam()"
         />
         <p class="hint">მხოლოდ ციფრები</p>
       </div>
       <div class="laptop_memory">
-        <label> მეხსიერების ტიპი</label>
+        <label [ngClass]="{ invalidLabel: !laptopHardDriveValid }">
+          მეხსიერების ტიპი
+          <img
+            *ngIf="!laptopHardDriveValid"
+            src="../../../assets/uploadWarning.png"
+            alt=""
+        /></label>
         <div class="radio_buttons">
           <input
             type="radio"
@@ -146,6 +168,7 @@
             value="SSD"
             name="LaptopHardDriveType"
             formControlName="LaptopHardDriveType"
+            (click)="turnValidlaptopHardDrive()"
           />
           <label for="ssd" class="memory_type">SSD</label>
           <input
@@ -154,6 +177,7 @@
             value="HDD"
             name="LaptopHardDriveType"
             formControlName="LaptopHardDriveType"
+            (click)="turnValidlaptopHardDrive()"
           />
           <label for="hdd" class="memory_type">HDD</label>
         </div>
@@ -172,7 +196,10 @@
           formControlName="LaptopPurchaseDate"
         />
       </div>
-      <div class="laptop_name laptop_price">
+      <div
+        class="laptop_name laptop_price"
+        [ngClass]="{ invalid: !laptopPriceValid }"
+      >
         <label>ლეპტოპის ფასი</label>
         <input
           type="number"
@@ -180,13 +207,19 @@
           placeholder="0000"
           aria-label="Laptop price"
           formControlName="LaptopPrice"
+          (keyup)="turnValidlaptopPrice()"
         />
         <p class="hint">მხოლოდ ციფრები</p>
       </div>
     </div>
     <div class="laptop_info">
       <div class="laptop_memory">
-        <label> ლეპტოპის მდგომარეობა</label>
+        <label [ngClass]="{ invalidLabel: !laptopStateValid }">
+          ლეპტოპის მდგომარეობა
+          <img
+            *ngIf="!laptopStateValid"
+            src="../../../assets/uploadWarning.png"
+        /></label>
         <div class="radio_buttons">
           <input
             type="radio"
@@ -194,6 +227,7 @@
             value="ახალი"
             name="LaptopState"
             formControlName="LaptopState"
+            (click)="turnValidLaptopState()"
           />
           <label for="new" class="memory_type">ახალი</label>
           <input
@@ -202,6 +236,7 @@
             value="ძველი"
             name="LaptopState"
             formControlName="LaptopState"
+            (click)="turnValidLaptopState()"
           />
           <label for="old" class="memory_type">მეორადი</label>
         </div>
