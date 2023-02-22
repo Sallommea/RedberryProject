@@ -63,12 +63,12 @@ a {
   margin-right: 25px;
 }
 
-.custom-active {
+.active {
   text-decoration: none;
   position: relative;
 }
 
-.custom-active:after {
+.active:after {
   position: absolute;
   content: "";
   height: 2px;

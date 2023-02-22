@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FileHandle } from '../drag-and-drop.directive';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Router, ActivatedRoute } from '@angular/router';
 import { GeneralsService } from 'src/app/services/generals.service';
 import { Brands, CPUs } from 'src/app/models/team.model';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
-import {} from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormAllInfo, ownerInfo } from 'src/app/models/form.model';
 
 @Component({
   selector: 'app-laptop-info',
@@ -18,9 +18,13 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
   showbutton = true;
   imageName: string;
   imageSize: string;
+  binaryString: string;
+  employeeInfo: ownerInfo;
+  token: string = '4b96756c57dd7a9d6aa75f70aa312e31';
   brands: Brands[] = [];
   cpus: CPUs[] = [];
   subs: Subscription[] = [];
+  laptopInfoForm: FormGroup;
   laptopNameValid = true;
   laptopImageValid = true;
   laptopBrandIdValid = true;
@@ -31,21 +35,25 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
   laptopHardDriveValid = true;
   laptopStateValid = true;
   laptopPriceValid = true;
-
+  data: any;
   constructor(
     private sanitizer: DomSanitizer,
     private router: Router,
     private generalsService: GeneralsService,
-    private activatedRoute: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute
+  ) {
+    this.subs.push(
+      this.generalsService.goback.subscribe(() => {
+        this.previousPage();
+      })
+    );
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      // const data = this.activatedRoute.snapshot.data.state.data;
-      // console.log(data);
-      // const data2 = this.router.getCurrentNavigation().extras.state.data;
-      // console.log(data2);
-    });
+    const data = JSON.parse(this.route.snapshot.queryParamMap.get('data'));
+    this.employeeInfo = data;
+    this.data = JSON.parse(sessionStorage.getItem('myData'));
+    this.updateData();
 
     this.subs.push(
       this.generalsService.getAllBrands().subscribe((res) => {
@@ -58,24 +66,37 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
         this.cpus = res;
       })
     );
+    this.subs.push(
+      this.generalsService.goToMain.subscribe(() => {
+        sessionStorage.clear();
+      })
+    );
   }
 
   filesDropped(files: FileHandle[]): void {
     this.files = files;
-    console.log(files[0].file);
+
+    const file = files[0].file;
+    const size = file.size / 1000000;
+    this.imageSize = size.toFixed(1) + ' gb';
+    this.imageName = file.name;
+
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      this.binaryString = reader.result + '';
+    };
+
+    reader.readAsBinaryString(file);
+
     this.laptopImageValid = true;
     this.showbutton = false;
-
-    const size = files[0].file.size / 1000000;
-    this.imageSize = size.toFixed(1) + ' gb';
-    this.imageName = files[0].file.name;
-    console.log(this.imageName, this.imageSize);
   }
 
-  onChange(img: File[]) {
+  onChange(files: File[]) {
     this.files = [];
     let validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
-    const file = img[0];
+    const file = files[0];
 
     const url = this.sanitizer.bypassSecurityTrustUrl(
       window.URL.createObjectURL(file)
@@ -84,7 +105,17 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
 
     if (validExtensions.includes(type)) {
       this.files.push({ file, url, type });
+    } else {
+      this.laptopImageValid = false;
+      this.showbutton = true;
+      return;
     }
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      this.binaryString = reader.result + '';
+      console.log(this.binaryString);
+    };
+    reader.readAsBinaryString(file);
 
     const size = file.size / 1000000;
     this.imageSize = size.toFixed(1) + ' gb';
@@ -93,27 +124,59 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
     this.laptopImageValid = true;
   }
 
-  laptopInfoForm: FormGroup = new FormGroup({
-    laptopName: new FormControl(null, [
-      Validators.required,
-      Validators.pattern('^[A-Za-z0-9!@#$%^&*()_+=]+$'),
-    ]),
-    laptopImage: new FormControl(null, [Validators.required]),
-    laptopBrandId: new FormControl(null, [Validators.required]),
-    laptopCPU: new FormControl(null, [Validators.required]),
-    laptopCPUCores: new FormControl(null, [Validators.required]),
-    LaptopCpuThreads: new FormControl(null, [Validators.required]),
-    LaptopRam: new FormControl(null, [Validators.required]),
-    LaptopHardDriveType: new FormControl(null, [Validators.required]),
-    LaptopState: new FormControl(null, [Validators.required]),
-    LaptopPurchaseDate: new FormControl(null),
-    LaptopPrice: new FormControl(null, [Validators.required]),
-  });
+  updateData() {
+    this.laptopInfoForm = new FormGroup({
+      laptopName: new FormControl(this.data?.name, [
+        Validators.required,
+        Validators.pattern('^[A-Za-z0-9!@#$%^&*()_+=]+$'),
+      ]),
+      laptopImage: new FormControl(null, [Validators.required]),
+      laptopBrandId: new FormControl(this.data?.brandId, [Validators.required]),
+      laptopCPU: new FormControl(this.data?.cpu, [Validators.required]),
+      laptopCPUCores: new FormControl(this.data?.cpuCores, [
+        Validators.required,
+      ]),
+      LaptopCpuThreads: new FormControl(this.data?.cpuThreads, [
+        Validators.required,
+      ]),
+      LaptopRam: new FormControl(this.data?.ram, [Validators.required]),
+      LaptopHardDriveType: new FormControl(this.data?.hardDrive, [
+        Validators.required,
+      ]),
+      LaptopState: new FormControl(this.data?.state, [Validators.required]),
+      LaptopPurchaseDate: new FormControl(this.data?.date),
+      LaptopPrice: new FormControl(this.data?.price, [Validators.required]),
+    });
+  }
 
   previousPage() {
-    this.router.navigateByUrl(`forms`);
+    this.generalsService.formsubmitted.emit(false);
+    console.log(this.laptopName.value);
+    let myObj = {
+      name: this.laptopName.value,
+      brandId: this.laptopBrandId.value,
+      cpu: this.laptopCPU.value,
+      cpuCores: this.laptopCPUCores.value,
+      cpuThreads: this.LaptopCpuThreads.value,
+      ram: this.LaptopRam.value,
+      hardDrive: this.LaptopHardDriveType.value,
+      state: this.LaptopState.value,
+      date: this.LaptopPurchaseDate.value,
+      price: this.LaptopPurchaseDate.value,
+    };
+    console.log(myObj);
+    sessionStorage.setItem('myData', JSON.stringify(myObj));
+    this.router.navigate(['forms'], {
+      state: {
+        data: {
+          info: this.employeeInfo,
+        },
+      },
+    });
   }
+
   onSubmit() {
+    sessionStorage.clear();
     if (this.laptopName.invalid) {
       this.laptopNameValid = false;
     }
@@ -144,11 +207,35 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
     if (this.LaptopPrice.invalid) {
       this.laptopPriceValid = false;
     }
-    if (this.laptopInfoForm.invalid) {
+    console.log(this.laptopInfoForm);
+    if (this.laptopInfoForm.invalid || !this.laptopImageValid) {
       return;
     }
 
+    const formAllInfo: FormAllInfo = {
+      name: this.employeeInfo.firstName,
+      surname: this.employeeInfo.lastName,
+      team_id: this.employeeInfo.team,
+      position_id: this.employeeInfo.position,
+      phone_number: this.employeeInfo.phoneNum,
+      email: this.employeeInfo.email,
+      token: this.token,
+      laptop_name: this.laptopInfoForm.value.laptopName,
+      laptop_image: this.binaryString,
+      laptop_brend_id: this.laptopInfoForm.value.laptopBrandId,
+      laptop_cpu: this.laptopInfoForm.value.laptopCPU,
+      latpop_cpu_cores: this.laptopInfoForm.value.laptopCPUCores,
+      latpop_cpu_threads: this.laptopInfoForm.value.LaptopCpuThreads,
+      laptop_ram: this.laptopInfoForm.value.LaptopRam,
+      laptop_hard_drive_type: this.laptopInfoForm.value.LaptopHardDriveType,
+      laptop_state: this.laptopInfoForm.value.LaptopState,
+      laptop_purchase_date: this.laptopInfoForm.value.LaptopPurchaseDate,
+      laptop_price: this.laptopInfoForm.value.LaptopPrice,
+    };
+    console.log(formAllInfo);
+
     console.log(this.laptopInfoForm);
+    sessionStorage.clear();
   }
 
   turnValidLaptopName() {
@@ -194,19 +281,15 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
   get laptopCPU() {
     return this.laptopInfoForm.get('laptopCPU');
   }
-
   get laptopName() {
     return this.laptopInfoForm.get('laptopName');
   }
-
   get laptopBrandId() {
     return this.laptopInfoForm.get('laptopBrandId');
   }
-
   get laptopCPUCores() {
     return this.laptopInfoForm.get('laptopCPUCores');
   }
-
   get LaptopCpuThreads() {
     return this.laptopInfoForm.get('LaptopCpuThreads');
   }

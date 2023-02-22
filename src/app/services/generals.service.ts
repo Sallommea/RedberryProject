@@ -43,4 +43,8 @@ export class GeneralsService {
       .get<ResponseCPUs>(`${this.baseUrl}cpus`)
       .pipe(map((x) => x.data));
   }
+  formsubmitted = new EventEmitter<boolean>();
+  employeeinfosubmitted = new EventEmitter();
+  goback = new EventEmitter();
+  goToMain = new EventEmitter();
 }

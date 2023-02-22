@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="employeeInfoForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="employeeInfoForm">
     <div class="row g-3">
       <div
         class="col inpName"
@@ -15,6 +15,7 @@
           aria-label="First name"
           formControlName="firstName"
           (keyup)="turnValidFirstName($event)"
+          
         />
         <p
           class="hint"
@@ -73,7 +74,7 @@
         placeholder="Select Username"
         value=""
       >
-        <option value="null" disabled>თიმი</option>
+        <option [value]="null" disabled>თიმი</option>
         <option *ngFor="let team of teams" [value]="team.id">
           {{ team.name }}
         </option>
@@ -92,7 +93,7 @@
         formControlName="position"
         (click)="turnValidPosition()"
       >
-        <option value="null" disabled>პოზიცია</option>
+        <option [value]="null" disabled>პოზიცია</option>
         <option *ngFor="let position of positions" [value]="position.id">
           {{ position.name }}
         </option>
@@ -139,7 +140,7 @@
     </div>
     <div class="row g-3 center">
       <div class="col inpName btnWrap">
-        <button type="submit" (click)="nextPage()" class="submitBtn">
+        <button type="button" (click)="nextPage()" class="submitBtn">
           შემდეგი
         </button>
       </div>

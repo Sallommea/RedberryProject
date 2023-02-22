@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="btnImgWrapper" routerLink="/">
+  <div class="btnImgWrapper" routerLink="/" (click)="mainPage()">
     <img src="assets/backforward.png" alt="goback" class="btnImg" />
   </div>
 
@@ -8,11 +8,12 @@
       <a
         routerLink="./"
         class="button"
-        routerLinkActive="custom-active"
+        routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
+        (click)="previous()"
         >თანამშრომლის ინფო</a
       >
-      <a routerLink="./laptop" routerLinkActive="custom-active" class="button"
+      <a (click)="nextpage()" [ngClass]="{ active: activated }" class="button"
         >ლეპტოპის მახასიათებლები</a
       >
     </div>

@@ -1,11 +1,5 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Position, User } from '../../models/team.model';
 import { GeneralsService } from 'src/app/services/generals.service';
@@ -17,24 +11,31 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./employee-info.component.css'],
 })
 export class EmployeeInfoComponent implements OnInit, OnDestroy {
-  @Output() next = new EventEmitter();
-
-  constructor(
-    private router: Router,
-    private generalsService: GeneralsService
-  ) {}
-
   teams: User[] = [];
   positions: Position[] = [];
   subs: Subscription[] = [];
+  employeeInfoForm: FormGroup;
   firstNameValid = true;
   lastNameValid = true;
   teamsValid = true;
   positionsValid = true;
   emailValid = true;
   phoneNumValid = true;
+  data: any;
 
+  constructor(
+    private router: Router,
+    private generalsService: GeneralsService
+  ) {
+    this.data = this.router.getCurrentNavigation().extras.state?.data.info;
+    this.subs.push(
+      this.generalsService.employeeinfosubmitted.subscribe(() => {
+        this.nextPage();
+      })
+    );
+  }
   ngOnInit(): void {
+    this.updateData();
     this.subs.push(
       this.generalsService.getAllTeams().subscribe((res) => {
         this.teams = res;
@@ -48,22 +49,31 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
     );
   }
 
-  employeeInfoForm: FormGroup = new FormGroup({
-    firstName: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(2),
-      this.onlyGeorgianLetters,
-    ]),
-    lastName: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(2),
-      this.onlyGeorgianLetters,
-    ]),
-    team: new FormControl(null, [Validators.required]),
-    position: new FormControl(null, [Validators.required]),
-    email: new FormControl(null, [Validators.required, this.emailRedberry]),
-    phoneNum: new FormControl(null, [Validators.required, this.georgianNum]),
-  });
+  updateData() {
+    this.employeeInfoForm = new FormGroup({
+      firstName: new FormControl(this.data?.firstName, [
+        Validators.required,
+        Validators.minLength(2),
+        this.onlyGeorgianLetters,
+      ]),
+      lastName: new FormControl(this.data?.lastName, [
+        Validators.required,
+        Validators.minLength(2),
+        this.onlyGeorgianLetters,
+      ]),
+      team: new FormControl(this.data?.team, [Validators.required]),
+      position: new FormControl(this.data?.position, [Validators.required]),
+      email: new FormControl(this.data?.email, [
+        Validators.required,
+        this.emailRedberry,
+      ]),
+      phoneNum: new FormControl(this.data?.phoneNum, [
+        Validators.required,
+        Validators.maxLength(13),
+        this.georgianNum,
+      ]),
+    });
+  }
 
   nextPage() {
     if (this.firstName.invalid) {
@@ -84,19 +94,15 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
     if (this.position.invalid) {
       this.positionsValid = false;
     }
-    // if (this.employeeInfoForm.invalid) {
-    //   return;
-    // }
+    if (this.employeeInfoForm.invalid) {
+      return;
+    }
 
-    console.log(this.employeeInfoForm);
-    console.log(this.firstName.status);
+    this.generalsService.formsubmitted.emit(true);
 
     this.router.navigate(['/forms/laptop'], {
-      state: { data: 'some data' },
+      queryParams: { data: JSON.stringify(this.employeeInfoForm.value) },
     });
-  }
-  onSubmit() {
-    console.log(this.employeeInfoForm.value.team);
   }
 
   // turning validators true when typing starts
@@ -104,6 +110,11 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
   turnValidFirstName(event: Event) {
     this.firstNameValid = true;
   }
+
+  // name(event: Event) {
+  // with change event
+  //   console.log((event.target as HTMLInputElement).value);
+  // }
   turnValidLastName() {
     this.lastNameValid = true;
   }
@@ -127,7 +138,7 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
     this.subs.forEach((x) => x.unsubscribe());
   }
 
-  // getting formgroup controls
+  // getting controls
 
   get firstName() {
     return this.employeeInfoForm.get('firstName');
