@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="btnImgWrapper" routerLink="/">
+    <img src="assets/backforward.png" alt="goback" class="btnImg" />
+  </div>
+  <div class="container">
+    <div class="btnContainer">
+      <h4>ᲚᲔᲞᲢᲝᲞᲘᲡ ᲘᲜᲤᲝ</h4>
+    </div>
+    <div class="containerUpperPart mt-5 pt-5">
+      <div class="mt-4">
+        <img src="assets/laptop1.png" alt="" />
+      </div>
+
+      <table class="table mt-4">
+        <tr>
+          <th>სახელი:</th>
+          <th>თიმი:</th>
+          <th>პოზიცია:</th>
+          <th>მეილი:</th>
+          <th>ტელ. ნომერი:</th>
+        </tr>
+
+        <tr>
+          <td>
+            {{ laptop?.data?.user.name }} {{ laptop?.data?.user.surname }}
+          </td>
+          <td>{{ team }}</td>
+          <td>{{ position }}</td>
+          <td>{{ laptop?.data?.user.email }}</td>
+          <td>
+            {{ laptop?.data?.user.phone_number }}
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="containerUpperPart mt-5"><hr class="hr" /></div>
+
+    <div class="containerUpperPart">
+      <div class="mt-4">
+        <table class="table" style="width: 460px">
+          <tr>
+            <th>ლეპტოპის სახელი:</th>
+            <th>ლეპტოპის ბრენდი:</th>
+            <th>RAM:</th>
+            <th>მეხსიერების ტიპი:</th>
+          </tr>
+
+          <tr>
+            <td>
+              {{ laptop?.data?.laptop.name }}
+            </td>
+            <td>{{ brand }}</td>
+            <td>{{ laptop?.data?.laptop.ram }}</td>
+            <td>{{ laptop?.data?.laptop.hard_drive_type }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="mt-4">
+        <table class="table">
+          <tr>
+            <th>CPU:</th>
+            <th>CPU-ს ბირთვი:</th>
+            <th>CPU-ს ნაკადი:</th>
+          </tr>
+
+          <tr>
+            <td>
+              {{ laptop?.data?.laptop.cpu.name }}
+            </td>
+            <td>{{ laptop?.data?.laptop.cpu.cores }}</td>
+            <td>{{ laptop?.data?.laptop.cpu.threads }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="containerUpperPart mt-5"><hr class="hr" /></div>
+    <div class="containerUpperPart">
+      <div class="mt-4">
+        <table class="table" style="width: 460px">
+          <tr>
+            <th>ლეპტოპის მდგომარეობა:</th>
+            <th>ლეპტოპის ფასი:</th>
+          </tr>
+
+          <tr>
+            <td>{{ laptop?.data?.laptop.state }}</td>
+            <td>{{ laptop?.data?.laptop.price }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="mt-4">
+        <table class="table">
+          <tr>
+            <th>შეძენის რიცხვი:</th>
+          </tr>
+
+          <tr>
+            <td>{{ laptop?.data?.laptop.purchase_date }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

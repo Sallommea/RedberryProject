@@ -220,11 +220,6 @@ hr {
   align-items: flex-start; */
   width: 330px;
 }
-/* .radio_buttons input {
-  height: 15px;
-  width: 15px;
-  margin-right: 25px;
-} */
 
 .radio_buttons label {
   margin-right: 60px;
@@ -266,8 +261,6 @@ hr {
   justify-content: center;
   font-family: "HelveticaNeue";
   font-style: normal;
-
-  font-size: 16px;
 }
 .buttons_row {
   display: flex;
@@ -283,6 +276,8 @@ hr {
   cursor: pointer;
   color: rgba(98, 161, 235, 1);
   font-size: 16px;
+  letter-spacing: 0.08em;
+  font-weight: 500;
 }
 .img_name_size {
   display: flex;

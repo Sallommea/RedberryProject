@@ -14,6 +14,8 @@ import { NgxMaskModule } from 'ngx-mask';
 
 import { IConfig } from 'ngx-mask';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ListComponent } from './list/list.component';
+import { DetailsComponent } from './list/details/details.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LaptopInfoComponent,
     HomeComponent,
     DragAndDropDirective,
+    ListComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,

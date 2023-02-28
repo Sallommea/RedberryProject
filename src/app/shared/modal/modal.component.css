@@ -1,0 +1,85 @@
+.modal {
+  display: unset;
+  font-family: "HelveticaNeue";
+}
+.hidden {
+  display: none !important;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(74, 74, 74, 1);
+}
+.modal-content {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+}
+.animateShowModal {
+  opacity: 1;
+  animation: showModal 0.2s forwards;
+  transform: scale(1);
+  top: 25px;
+}
+.animateOverlayShow {
+  opacity: 1;
+  animation: appear 0.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes showModal {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+    top: 50px;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    top: 25px;
+  }
+}
+img {
+  height: auto;
+  width: 137px;
+}
+
+p {
+  font-family: "HelveticaNeue";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.go_back_button {
+  background: rgb(255, 255, 255);
+  border: none;
+  cursor: pointer;
+  color: rgba(98, 161, 235, 1);
+  font-size: 16px;
+  font-weight: 600;
+}
+.modal-dialog.custom-size {
+  max-width: 800px;
+  width: 45%;
+}

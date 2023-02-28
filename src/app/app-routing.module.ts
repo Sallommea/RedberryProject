@@ -4,6 +4,9 @@ import { EmployeeInfoComponent } from './form/employee-info/employee-info.compon
 import { FormComponent } from './form/form.component';
 import { LaptopInfoComponent } from './form/laptop-info/laptop-info.component';
 import { HomeComponent } from './home/home.component';
+import { DetailsComponent } from './list/details/details.component';
+import { ListComponent } from './list/list.component';
+import { ModalComponent } from './shared/modal/modal.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +19,8 @@ const routes: Routes = [
       { path: 'laptop', component: LaptopInfoComponent },
     ],
   },
+  { path: 'list', component: ListComponent },
+  { path: 'list/laptops/:id', component: DetailsComponent },
 ];
 
 @NgModule({

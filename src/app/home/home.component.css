@@ -1,32 +1,29 @@
-.image-wrapper {
+.display {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 1.5rem 0;
+  justify-content: center;
 }
+
 a {
   font-family: "HelveticaNeue";
   font-style: normal;
   font-weight: 500;
   font-size: 17px;
-  line-height: 24px;
   color: white;
   text-decoration: none;
 }
+
 .logo {
-  /* width: 6vw; */
-  width: 5%;
   margin-top: 5rem;
-  margin-left: 5rem;
-  box-sizing: border-box;
+  width: 6.2rem;
+  height: 1rem;
 }
 
-.frameImg {
-  /* width: 30vw; */
-  width: 40%;
+.frame-img {
+  width: 49rem;
+  height: 30rem;
   margin-top: 5rem;
-  padding-left: 100px;
 }
 
 .btn-container {
@@ -34,7 +31,37 @@ a {
   flex-direction: column;
   gap: 20px;
   justify-content: center;
-  align-items: center;
-  padding: 0.5rem 0;
-  margin-top: 3rem;
+  margin-top: 5rem;
+  padding-right: 4rem;
+}
+
+@media (max-width: 1366px) {
+  .frame-img {
+    margin-top: 3rem;
+  }
+  .btn-container {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+  }
+  .logo {
+    margin-top: 4rem;
+    width: 5rem;
+    height: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .frame-img {
+    width: 70%;
+    margin-top: 6rem;
+  }
+  .btn-container {
+    /* margin-bottom: 2rem; */
+    margin-top: 6rem;
+  }
+  .logo {
+    margin-top: 7rem;
+    width: 5rem;
+    height: 0.8rem;
+  }
 }

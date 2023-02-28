@@ -4,7 +4,7 @@
       <div
         class="col inpName"
         [ngClass]="{
-          invalid: (firstName.invalid && firstName.touched)|| firstName.errors?.['onlyGeorgianLetters']|| !firstNameValid
+          invalid: (employeeInfoForm.controls.firstName.invalid && employeeInfoForm.controls.firstName.touched)|| employeeInfoForm.controls.firstName.errors?.['onlyGeorgianLetters']|| !firstNameValid
         }"
       >
         <label>სახელი</label>
@@ -15,17 +15,16 @@
           aria-label="First name"
           formControlName="firstName"
           (keyup)="turnValidFirstName($event)"
-          
         />
         <p
           class="hint"
-          *ngIf="!firstName.errors?.['onlyGeorgianLetters'] || (firstName.errors?.['onlyGeorgianLetters'] && firstName.errors?.['required'])"
+          *ngIf="!employeeInfoForm.controls.firstName.errors?.['onlyGeorgianLetters'] || (employeeInfoForm.controls.firstName.errors?.['onlyGeorgianLetters'] && employeeInfoForm.controls.firstName.errors?.['required'])"
         >
           მინიმუმ 2 სიმბოლო, ქართული ასოები
         </p>
         <p
           class="hint"
-          *ngIf="firstName.errors?.['onlyGeorgianLetters'] && !firstName.errors?.['required']"
+          *ngIf="employeeInfoForm.controls.firstName.errors?.['onlyGeorgianLetters'] && !employeeInfoForm.controls.firstName.errors?.['required']"
         >
           გამოიყენე ქართული ასოები
         </p>
@@ -34,7 +33,7 @@
       <div
         class="col inpName"
         [ngClass]="{
-          invalid: (lastName && lastName.invalid && lastName.touched)|| lastName.errors?.['onlyGeorgianLetters'] || !lastNameValid
+          invalid: (employeeInfoForm.controls.lastName && employeeInfoForm.controls.lastName.invalid && employeeInfoForm.controls.lastName.touched)|| employeeInfoForm.controls.lastName.errors?.['onlyGeorgianLetters'] || !lastNameValid
         }"
       >
         <label>გვარი</label>
@@ -48,13 +47,13 @@
         />
         <p
           class="hint"
-          *ngIf="!lastName.errors?.['onlyGeorgianLetters'] || (lastName.errors?.['onlyGeorgianLetters'] && lastName.errors?.['required'])"
+          *ngIf="!employeeInfoForm.controls.lastName.errors?.['onlyGeorgianLetters'] || (employeeInfoForm.controls.lastName.errors?.['onlyGeorgianLetters'] && employeeInfoForm.controls.lastName.errors?.['required'])"
         >
           მინიმუმ 2 სიმბოლო, ქართული ასოები
         </p>
         <p
           class="hint"
-          *ngIf="lastName.errors?.['onlyGeorgianLetters'] && !lastName.errors?.['required']"
+          *ngIf="employeeInfoForm.controls.lastName.errors?.['onlyGeorgianLetters'] && !employeeInfoForm.controls.lastName.errors?.['required']"
         >
           გამოიყენე ქართული ასოები
         </p>
@@ -63,7 +62,10 @@
     <div
       class="row g-3 select"
       [ngClass]="{
-        invalid: (team.invalid && team.touched) || !teamsValid
+        invalid:
+          (employeeInfoForm.controls.team.invalid &&
+            employeeInfoForm.controls.team.touched) ||
+          !teamsValid
       }"
     >
       <select
@@ -84,7 +86,10 @@
     <div
       class="row g-3 select"
       [ngClass]="{
-        invalid: (position.invalid && position.touched) || !positionsValid
+        invalid:
+          (employeeInfoForm.controls.position.invalid &&
+            employeeInfoForm.controls.position.touched) ||
+          !positionsValid
       }"
     >
       <select
@@ -103,7 +108,11 @@
       <div
         class="col inpName"
         [ngClass]="{
-          invalid: (email && email.invalid && email.touched) || !emailValid
+          invalid:
+            (employeeInfoForm.controls.email &&
+              employeeInfoForm.controls.email.invalid &&
+              employeeInfoForm.controls.email.touched) ||
+            !emailValid
         }"
       >
         <label>მეილი</label>
@@ -122,7 +131,10 @@
       class="row g-3 select"
       [ngClass]="{
         invalid:
-          (phoneNum && phoneNum.invalid && phoneNum.touched) || !phoneNumValid
+          (employeeInfoForm.controls.phoneNum &&
+            employeeInfoForm.controls.phoneNum.invalid &&
+            employeeInfoForm.controls.phoneNum.touched) ||
+          !phoneNumValid
       }"
     >
       <div class="col inpName">
@@ -140,9 +152,12 @@
     </div>
     <div class="row g-3 center">
       <div class="col inpName btnWrap">
-        <button type="button" (click)="nextPage()" class="submitBtn">
+        <!-- <button type="button" (click)="nextPage()" class="submitBtn">
           შემდეგი
-        </button>
+        </button> -->
+        <app-button type="button" (click)="nextPage()" class="submitBtn"
+          >შემდეგი</app-button
+        >
       </div>
     </div>
   </form>

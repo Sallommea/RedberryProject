@@ -83,30 +83,6 @@ label {
   margin-bottom: 40px;
 }
 
-.submitBtn {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 18px 60px;
-  gap: 20px;
-  outline: none;
-  box-shadow: none;
-  width: 150px;
-  height: 50px;
-  cursor: pointer;
-  background: #62a1eb;
-  border-radius: 8px;
-
-  color: #ffffff;
-  border: none;
-
-  justify-content: center;
-  font-family: "HelveticaNeue";
-  font-style: normal;
-
-  font-size: 16px;
-}
-
 .invalid label {
   color: #e52f2f;
 }

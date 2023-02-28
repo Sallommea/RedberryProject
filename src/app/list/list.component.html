@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="btnImgWrapper" routerLink="/">
+    <img src="assets/backforward.png" alt="goback" class="btnImg" />
+  </div>
+  <div class="container">
+    <div class="btnContainer">
+      <h4>ᲩᲐᲜᲐᲬᲔᲠᲔᲑᲘᲡ ᲡᲘᲐ</h4>
+    </div>
+    <div class="container mt-5 pt-5">
+      <div class="row mt-4">
+        <div
+          class="col-md-6 mb-5"
+          *ngFor="let laptop of laptops; let i = index"
+        >
+          <div class="card flex-row">
+            <div
+              class="card-img-left d-flex justify-content-center align-items-center"
+              style="width: 50%"
+            >
+              <img
+                src="./../../assets/pc.png"
+                alt="Card image cap"
+                style="width: 90%"
+              />
+            </div>
+            <div class="card-body" style="width: 70%">
+              <h5 class="card-title mt-3 pb-2">
+                {{ laptop.user.name }} {{ laptop.user.surname }}
+              </h5>
+              <p class="card-text mb-4">{{ laptop.laptop.name }}</p>
+              <div class="pb-3">
+                <a [routerLink]="'laptops/' + laptop.laptop.id" class="pb-3"
+                  >მეტის ნახვა</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

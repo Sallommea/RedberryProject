@@ -1,0 +1,41 @@
+h4 {
+  font-family: "HelveticaNeue";
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.btnImgWrapper {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 70px;
+  cursor: pointer;
+  top: 40px;
+  background: #d9d9d9;
+}
+
+.btnImg {
+  width: 7.21px;
+  height: 11px;
+}
+
+.btnContainer {
+  position: relative;
+  top: 70px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+.card {
+  background-color: rgba(234, 250, 255, 1);
+  border-color: rgba(174, 209, 234, 1);
+  font-family: "HelveticaNeue";
+}
+img {
+  width: 90%;
+  height: 90%;
+}

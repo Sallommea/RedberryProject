@@ -1,5 +1,5 @@
-<div>
-  <form [formGroup]="laptopInfoForm" (ngSubmit)="onSubmit()">
+<div class="container">
+  <form [formGroup]="laptopInfoForm" (ngSubmit)="onSubmit($event)">
     <div
       class="imgUploadContainer"
       appDragAndDrop
@@ -7,9 +7,6 @@
       [ngClass]="{ noBorder: !showbutton }"
       [ngClass]="{ invalidCon: !laptopImageValid }"
     >
-      <!-- <div *ngFor="let file of files">
-        <img *ngIf="file" [src]="file.url" alt="" />
-      </div> -->
       <img *ngIf="files[0]" [src]="files[0].url" alt="" />
       <div class="warning-image" *ngIf="!laptopImageValid">
         <img src="../../../assets/uploadWarning.png" alt="" />
@@ -59,7 +56,7 @@
         class="laptop_name"
         [ngClass]="{
           invalid:
-            (laptopName.invalid && laptopName.touched) || laptopName.errors?.['pattern'] || !laptopNameValid
+            (laptopInfoForm.controls.laptopName.invalid && laptopInfoForm.controls.laptopName.touched) || laptopInfoForm.controls.laptopName.errors?.['pattern'] || !laptopNameValid
         }"
       >
         <label>ლეპტოპის სახელი</label>
@@ -77,7 +74,8 @@
         class="laptop_name"
         [ngClass]="{
           invalid:
-            (laptopBrandId.invalid && laptopBrandId.touched) ||
+            (laptopInfoForm.controls.laptopBrandId.invalid &&
+              laptopInfoForm.controls.laptopBrandId.touched) ||
             !laptopBrandIdValid
         }"
       >
@@ -99,7 +97,10 @@
       <div
         class="laptop_CPU"
         [ngClass]="{
-          invalid: (laptopCPU.invalid && laptopCPU.touched) || !laptopCpuValid
+          invalid:
+            (laptopInfoForm.controls.laptopCPU.invalid &&
+              laptopInfoForm.controls.laptopCPU.touched) ||
+            !laptopCpuValid
         }"
       >
         <select
@@ -232,7 +233,7 @@
           <input
             type="radio"
             id="old"
-            value="ძველი"
+            value="მეორადი"
             name="LaptopState"
             formControlName="LaptopState"
             (click)="turnValidLaptopState()"
@@ -247,3 +248,4 @@
     </div>
   </form>
 </div>
+<app-modal *ngIf="showModal"> </app-modal>

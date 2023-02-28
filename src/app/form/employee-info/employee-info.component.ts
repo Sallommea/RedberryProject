@@ -69,34 +69,33 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
       ]),
       phoneNum: new FormControl(this.data?.phoneNum, [
         Validators.required,
-        Validators.maxLength(13),
         this.georgianNum,
       ]),
     });
   }
 
   nextPage() {
-    if (this.firstName.invalid) {
+    if (this.employeeInfoForm.controls.firstName.invalid) {
       this.firstNameValid = false;
     }
-    if (this.lastName.invalid) {
+    if (this.employeeInfoForm.controls.lastName.invalid) {
       this.lastNameValid = false;
     }
-    if (this.email.invalid) {
+    if (this.employeeInfoForm.controls.email.invalid) {
       this.emailValid = false;
     }
-    if (this.phoneNum.invalid) {
+    if (this.employeeInfoForm.controls.phoneNum.invalid) {
       this.phoneNumValid = false;
     }
-    if (this.team.invalid) {
+    if (this.employeeInfoForm.controls.team.invalid) {
       this.teamsValid = false;
     }
-    if (this.position.invalid) {
+    if (this.employeeInfoForm.controls.position.invalid) {
       this.positionsValid = false;
     }
-    if (this.employeeInfoForm.invalid) {
-      return;
-    }
+    // if (this.employeeInfoForm.invalid) {
+    //   return;
+    // }
 
     this.generalsService.formsubmitted.emit(true);
 
@@ -111,10 +110,6 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
     this.firstNameValid = true;
   }
 
-  // name(event: Event) {
-  // with change event
-  //   console.log((event.target as HTMLInputElement).value);
-  // }
   turnValidLastName() {
     this.lastNameValid = true;
   }
@@ -136,31 +131,6 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.forEach((x) => x.unsubscribe());
-  }
-
-  // getting controls
-
-  get firstName() {
-    return this.employeeInfoForm.get('firstName');
-  }
-
-  get lastName() {
-    return this.employeeInfoForm.get('lastName');
-  }
-
-  get team() {
-    return this.employeeInfoForm.get('team');
-  }
-
-  get position() {
-    return this.employeeInfoForm.get('position');
-  }
-  get email() {
-    return this.employeeInfoForm.get('email');
-  }
-
-  get phoneNum() {
-    return this.employeeInfoForm.get('phoneNum');
   }
 
   // custom validators
@@ -185,8 +155,7 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
     const beginning = '+9955';
     if (
       control.value != null &&
-      control.value.length != 13 &&
-      beginning != control.value.slice(0, 5)
+      (control.value.length !== 13 || beginning != control.value.slice(0, 5))
     ) {
       return { georgianNum: true };
     }

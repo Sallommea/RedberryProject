@@ -7,11 +7,11 @@ export interface FormAllInfo {
   email: string;
   token: string;
   laptop_name: string;
-  laptop_image: string;
-  laptop_brend_id: number;
+  laptop_image: any;
+  laptop_brand_id: number;
   laptop_cpu: string;
-  latpop_cpu_cores: number;
-  latpop_cpu_threads: number;
+  laptop_cpu_cores: number;
+  laptop_cpu_threads: number;
   laptop_ram: number;
   laptop_hard_drive_type: string;
   laptop_state: string;
@@ -26,4 +26,20 @@ export interface ownerInfo {
   position: number;
   phoneNum: string;
   email: string;
+}
+
+export interface Response {
+  data: Data[];
+}
+
+export interface Data {
+  laptop: {
+    image: string;
+    name: string;
+    id: number;
+  };
+  user: {
+    name: string;
+    surname: string;
+  };
 }
