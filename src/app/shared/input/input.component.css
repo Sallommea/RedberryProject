@@ -1,0 +1,29 @@
+input {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border: 2px solid #8ac0e2;
+}
+.hint {
+  color: #2e2e2eab;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.invalidInput {
+  color: #e52f2f;
+}
+.invalid {
+  border: 1.8px solid #e52f2f;
+}
+
+/* .invalid select {
+  border: 1.8px solid #e52f2f;
+}
+.invalid p {
+  color: #e52f2f;
+}
+
+.invalid input:active,
+.invalid input:focus {
+  border-color: #e52f2f;
+} */

@@ -23,7 +23,8 @@
           type="file"
           name="file"
           id="file"
-          (change)="onChange($event.target.files)"
+          (change)="onChange($event)"
+          accept=".png,.jpeg,.jpg"
           formControlName="laptopImage"
         />
         <label class="submitBtn" for="file">ატვირთე</label>
@@ -42,33 +43,25 @@
       </div>
       <div class="upload">
         <input
-          class="try"
           type="file"
           name="file"
           id="file"
-          (change)="onChange($event.target.files)"
+          (change)="onChange($event)"
+          accept=".png,.jpeg,.jpg"
         />
         <label class="upload_bottom" for="file">თავიდან ატვირთე</label>
       </div>
     </div>
-    <div class="laptop_info">
-      <div
-        class="laptop_name"
-        [ngClass]="{
-          invalid:
-            (laptopInfoForm.controls.laptopName.invalid && laptopInfoForm.controls.laptopName.touched) || laptopInfoForm.controls.laptopName.errors?.['pattern'] || !laptopNameValid
-        }"
-      >
-        <label>ლეპტოპის სახელი</label>
-        <input
-          type="text"
-          class="form-control shadow-none"
+    <div class="laptop_info mt-4 mb-4">
+      <div class="laptop_name">
+        <app-input
           placeholder="HP"
-          aria-label="Laptop name"
-          formControlName="laptopName"
-          (keyup)="turnValidLaptopName()"
-        />
-        <p class="hint">ლათინური ასოები, ციფრები, !@#$%^&*()_+=</p>
+          [control]="laptopInfoForm.controls.laptopName"
+          [isSubmitAttempted]="isSubmitAttempted"
+        >
+          <span title>ლეპტოპის სახელი</span>
+          <span hint> ლათინური ასოები, ციფრები, !@#$%^&*()_+=</span></app-input
+        >
       </div>
       <div
         class="laptop_name"
@@ -76,14 +69,14 @@
           invalid:
             (laptopInfoForm.controls.laptopBrandId.invalid &&
               laptopInfoForm.controls.laptopBrandId.touched) ||
-            !laptopBrandIdValid
+            (laptopInfoForm.controls.laptopBrandId.errors != null &&
+              isSubmitAttempted)
         }"
       >
         <select
           class="form-select form-select-sm shadow-none"
           aria-label=".form-select-sm example"
           formControlName="laptopBrandId"
-          (click)="turnValidlaptopBrandId()"
         >
           <option value="null" disabled>ლეპტოპის ბრენდი</option>
           <option value="1" *ngFor="let brand of brands">
@@ -100,14 +93,14 @@
           invalid:
             (laptopInfoForm.controls.laptopCPU.invalid &&
               laptopInfoForm.controls.laptopCPU.touched) ||
-            !laptopCpuValid
+            (laptopInfoForm.controls.laptopCPU.errors != null &&
+              isSubmitAttempted)
         }"
       >
         <select
           class="form-select form-select-sm shadow-none"
           aria-label=".form-select-sm example"
           formControlName="laptopCPU"
-          (click)="turnValidlaptopCpu()"
         >
           <option disabled value="null">CPU</option>
           <option value="1" *ngFor="let cpu of cpus">
@@ -115,49 +108,55 @@
           </option>
         </select>
       </div>
-      <div class="laptop_CPU" [ngClass]="{ invalid: !laptopCPUCoresValid }">
-        <label>CPU-ს ბირთვი</label>
-        <input
-          type="number"
-          class="form-control shadow-none"
+      <div class="laptop_CPU">
+        <app-input
           placeholder="14"
-          aria-label="CPU core"
-          formControlName="laptopCPUCores"
-          (keyup)="turnValidlaptopCPUCores()"
-        />
-        <p class="hint">მხოლოდ ციფრები</p>
-      </div>
-      <div class="laptop_CPU" [ngClass]="{ invalid: !laptopCpuThreadsValid }">
-        <label>CPU-ს ნაკადი</label>
-        <input
           type="number"
-          class="form-control shadow-none"
+          [control]="laptopInfoForm.controls.laptopCPUCores"
+          [isSubmitAttempted]="isSubmitAttempted"
+        >
+          <span title>CPU-ს ბირთვი</span>
+          <span hint> მხოლოდ ციფრები</span></app-input
+        >
+      </div>
+      <div class="laptop_CPU">
+        <app-input
           placeholder="365"
-          aria-label="CPU"
-          formControlName="LaptopCpuThreads"
-          (keyup)="turnValidlaptopCpuThreads()"
-        />
-        <p class="hint">მხოლოდ ციფრები</p>
+          type="number"
+          [control]="laptopInfoForm.controls.LaptopCpuThreads"
+          [isSubmitAttempted]="isSubmitAttempted"
+        >
+          <span title>CPU-ს ნაკადი</span>
+          <span hint> მხოლოდ ციფრები</span></app-input
+        >
       </div>
     </div>
     <div class="laptop_info">
-      <div class="laptop_name" [ngClass]="{ invalid: !laptopRamValid }">
-        <label>ლეპტოპის RAM (GB)</label>
-        <input
-          type="number"
-          class="form-control shadow-none"
+      <div class="laptop_name">
+        <app-input
           placeholder="16"
-          aria-label="Laptop name"
-          formControlName="LaptopRam"
-          (keyup)="turnValidLaptopRam()"
-        />
-        <p class="hint">მხოლოდ ციფრები</p>
+          type="number"
+          [control]="laptopInfoForm.controls.LaptopRam"
+          [isSubmitAttempted]="isSubmitAttempted"
+        >
+          <span title>ლეპტოპის RAM (GB)</span>
+          <span hint> მხოლოდ ციფრები</span></app-input
+        >
       </div>
       <div class="laptop_memory">
-        <label [ngClass]="{ invalidLabel: !laptopHardDriveValid }">
+        <label
+          [ngClass]="{
+            invalidLabel:
+              laptopInfoForm.controls.LaptopHardDriveType.errors != null &&
+              isSubmitAttempted
+          }"
+        >
           მეხსიერების ტიპი
           <img
-            *ngIf="!laptopHardDriveValid"
+            *ngIf="
+              laptopInfoForm.controls.LaptopHardDriveType.errors != null &&
+              isSubmitAttempted
+            "
             src="../../../assets/uploadWarning.png"
             alt=""
         /></label>
@@ -168,7 +167,6 @@
             value="SSD"
             name="LaptopHardDriveType"
             formControlName="LaptopHardDriveType"
-            (click)="turnValidlaptopHardDrive()"
           />
           <label for="ssd" class="memory_type">SSD</label>
           <input
@@ -177,14 +175,13 @@
             value="HDD"
             name="LaptopHardDriveType"
             formControlName="LaptopHardDriveType"
-            (click)="turnValidlaptopHardDrive()"
           />
           <label for="hdd" class="memory_type">HDD</label>
         </div>
       </div>
     </div>
     <hr />
-    <div class="laptop_info purchase_info">
+    <div class="laptop_info purchase_info mt-5">
       <div class="laptop_name">
         <label>შეძენის რიცხვი (არჩევითი)</label>
         <input
@@ -196,28 +193,33 @@
           formControlName="LaptopPurchaseDate"
         />
       </div>
-      <div
-        class="laptop_name laptop_price"
-        [ngClass]="{ invalid: !laptopPriceValid }"
-      >
-        <label>ლეპტოპის ფასი</label>
-        <input
-          type="number"
-          class="form-control shadow-none"
+      <div class="laptop_name laptop_price">
+        <app-input
           placeholder="0000"
-          aria-label="Laptop price"
-          formControlName="LaptopPrice"
-          (keyup)="turnValidlaptopPrice()"
-        />
-        <p class="hint">მხოლოდ ციფრები</p>
+          type="number"
+          [control]="laptopInfoForm.controls.LaptopPrice"
+          [isSubmitAttempted]="isSubmitAttempted"
+        >
+          <span title>ლეპტოპის ფასი</span>
+          <span hint> მხოლოდ ციფრები</span></app-input
+        >
       </div>
     </div>
     <div class="laptop_info">
       <div class="laptop_memory">
-        <label [ngClass]="{ invalidLabel: !laptopStateValid }">
+        <label
+          [ngClass]="{
+            invalidLabel:
+              laptopInfoForm.controls.LaptopState.errors != null &&
+              isSubmitAttempted
+          }"
+        >
           ლეპტოპის მდგომარეობა
           <img
-            *ngIf="!laptopStateValid"
+            *ngIf="
+              laptopInfoForm.controls.LaptopState.errors != null &&
+              isSubmitAttempted
+            "
             src="../../../assets/uploadWarning.png"
         /></label>
         <div class="radio_buttons">
@@ -227,7 +229,6 @@
             value="ახალი"
             name="LaptopState"
             formControlName="LaptopState"
-            (click)="turnValidLaptopState()"
           />
           <label for="new" class="memory_type">ახალი</label>
           <input
@@ -236,7 +237,6 @@
             value="მეორადი"
             name="LaptopState"
             formControlName="LaptopState"
-            (click)="turnValidLaptopState()"
           />
           <label for="old" class="memory_type">მეორადი</label>
         </div>

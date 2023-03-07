@@ -1,10 +1,10 @@
 form {
   background: rgb(255, 255, 255);
   width: 1000px;
-  margin: 50px auto;
+  margin: 20px auto;
   max-width: 97%;
   border-radius: 8px;
-  height: 1400px;
+  /* height: 1400px; */
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -175,7 +175,9 @@ input[type="radio"]:checked {
   justify-content: space-between;
   align-items: center;
   width: 700px;
-  margin-top: -10px;
+  font-weight: 700;
+  font-family: "HelveticaNeue";
+  font-style: normal;
 }
 .laptop_name {
   display: flex;
@@ -189,7 +191,9 @@ input[type="radio"]:checked {
   justify-content: space-between;
   align-items: center;
   width: 700px;
-  margin-top: -40px;
+  font-weight: 700;
+  font-family: "HelveticaNeue";
+  font-style: normal;
 }
 .laptop_CPU select,
 input {

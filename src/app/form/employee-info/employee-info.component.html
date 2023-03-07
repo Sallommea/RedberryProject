@@ -1,62 +1,26 @@
 <div class="container">
   <form [formGroup]="employeeInfoForm">
     <div class="row g-3">
-      <div
-        class="col inpName"
-        [ngClass]="{
-          invalid: (employeeInfoForm.controls.firstName.invalid && employeeInfoForm.controls.firstName.touched)|| employeeInfoForm.controls.firstName.errors?.['onlyGeorgianLetters']|| !firstNameValid
-        }"
-      >
-        <label>სახელი</label>
-        <input
-          type="text"
-          class="form-control shadow-none"
+      <div class="col inpName">
+        <app-input
           placeholder="გრიშა"
-          aria-label="First name"
-          formControlName="firstName"
-          (keyup)="turnValidFirstName($event)"
-        />
-        <p
-          class="hint"
-          *ngIf="!employeeInfoForm.controls.firstName.errors?.['onlyGeorgianLetters'] || (employeeInfoForm.controls.firstName.errors?.['onlyGeorgianLetters'] && employeeInfoForm.controls.firstName.errors?.['required'])"
+          [control]="employeeInfoForm.controls.firstName"
+          [isSubmitAttempted]="isSubmitAttempted"
         >
-          მინიმუმ 2 სიმბოლო, ქართული ასოები
-        </p>
-        <p
-          class="hint"
-          *ngIf="employeeInfoForm.controls.firstName.errors?.['onlyGeorgianLetters'] && !employeeInfoForm.controls.firstName.errors?.['required']"
+          <span title>სახელი</span>
+          <span hint> მინიმუმ 2 სიმბოლო, ქართული ასოები</span></app-input
         >
-          გამოიყენე ქართული ასოები
-        </p>
       </div>
 
-      <div
-        class="col inpName"
-        [ngClass]="{
-          invalid: (employeeInfoForm.controls.lastName && employeeInfoForm.controls.lastName.invalid && employeeInfoForm.controls.lastName.touched)|| employeeInfoForm.controls.lastName.errors?.['onlyGeorgianLetters'] || !lastNameValid
-        }"
-      >
-        <label>გვარი</label>
-        <input
-          type="text"
-          class="form-control shadow-none try"
+      <div class="col inpName">
+        <app-input
           placeholder="ბაგრატიონი"
-          aria-label="Last name"
-          formControlName="lastName"
-          (keyup)="turnValidLastName()"
-        />
-        <p
-          class="hint"
-          *ngIf="!employeeInfoForm.controls.lastName.errors?.['onlyGeorgianLetters'] || (employeeInfoForm.controls.lastName.errors?.['onlyGeorgianLetters'] && employeeInfoForm.controls.lastName.errors?.['required'])"
+          [control]="employeeInfoForm.controls.lastName"
+          [isSubmitAttempted]="isSubmitAttempted"
         >
-          მინიმუმ 2 სიმბოლო, ქართული ასოები
-        </p>
-        <p
-          class="hint"
-          *ngIf="employeeInfoForm.controls.lastName.errors?.['onlyGeorgianLetters'] && !employeeInfoForm.controls.lastName.errors?.['required']"
+          <span title>გვარი</span>
+          <span hint> მინიმუმ 2 სიმბოლო, ქართული ასოები</span></app-input
         >
-          გამოიყენე ქართული ასოები
-        </p>
       </div>
     </div>
     <div
@@ -65,14 +29,13 @@
         invalid:
           (employeeInfoForm.controls.team.invalid &&
             employeeInfoForm.controls.team.touched) ||
-          !teamsValid
+          (employeeInfoForm.controls.team.errors != null && isSubmitAttempted)
       }"
     >
       <select
         class="form-select form-select-sm shadow-none"
         aria-label=".form-select-sm example"
         formControlName="team"
-        (click)="turnValidTeam()"
         placeholder="Select Username"
         value=""
       >
@@ -89,14 +52,14 @@
         invalid:
           (employeeInfoForm.controls.position.invalid &&
             employeeInfoForm.controls.position.touched) ||
-          !positionsValid
+          (employeeInfoForm.controls.position.errors != null &&
+            isSubmitAttempted)
       }"
     >
       <select
         class="form-select form-select-sm shadow-none"
         aria-label=".form-select-sm example"
         formControlName="position"
-        (click)="turnValidPosition()"
       >
         <option [value]="null" disabled>პოზიცია</option>
         <option *ngFor="let position of positions" [value]="position.id">
@@ -105,56 +68,33 @@
       </select>
     </div>
     <div class="row g-3">
-      <div
-        class="col inpName"
-        [ngClass]="{
-          invalid:
-            (employeeInfoForm.controls.email &&
-              employeeInfoForm.controls.email.invalid &&
-              employeeInfoForm.controls.email.touched) ||
-            !emailValid
-        }"
-      >
-        <label>მეილი</label>
-        <input
-          type="text"
-          class="form-control shadow-none"
+      <div class="col inpName">
+        <app-input
           placeholder="grish666@redberry.ge"
-          aria-label="Last name"
-          formControlName="email"
-          (keyup)="turnValidEmail()"
-        />
-        <p class="hint">უნდა მთავრდებოდეს @redberry.ge</p>
+          [control]="employeeInfoForm.controls.email"
+          [isSubmitAttempted]="isSubmitAttempted"
+        >
+          <span title>მეილი</span>
+          <span hint> უნდა მთავრდებოდეს @redberry.ge</span></app-input
+        >
       </div>
     </div>
-    <div
-      class="row g-3 select"
-      [ngClass]="{
-        invalid:
-          (employeeInfoForm.controls.phoneNum &&
-            employeeInfoForm.controls.phoneNum.invalid &&
-            employeeInfoForm.controls.phoneNum.touched) ||
-          !phoneNumValid
-      }"
-    >
+    <div class="row g-3 select">
       <div class="col inpName">
-        <label>ტელეფონის ნომერი</label>
-        <input
-          type="text"
-          class="form-control shadow-none"
+        <app-input
           placeholder="+995 598 00 07 01"
-          aria-label="Last name"
-          formControlName="phoneNum"
-          (keyup)="turnValidPhoneNum()"
-        />
-        <p class="hint">უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს</p>
+          [control]="employeeInfoForm.controls.phoneNum"
+          [isSubmitAttempted]="isSubmitAttempted"
+        >
+          <span title>ტელეფონის ნომერი</span>
+          <span hint>
+            უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს</span
+          ></app-input
+        >
       </div>
     </div>
     <div class="row g-3 center">
       <div class="col inpName btnWrap">
-        <!-- <button type="button" (click)="nextPage()" class="submitBtn">
-          შემდეგი
-        </button> -->
         <app-button type="button" (click)="nextPage()" class="submitBtn"
           >შემდეგი</app-button
         >

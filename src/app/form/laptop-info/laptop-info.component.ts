@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
 import { FileHandle } from '../drag-and-drop.directive';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -19,31 +19,21 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
   showbutton = true;
   imageName: string;
   imageSize: string;
-  binaryString: any;
   employeeInfo: ownerInfo;
   token: string = '4b96756c57dd7a9d6aa75f70aa312e31';
   brands: Brands[] = [];
   cpus: CPUs[] = [];
   subs: Subscription[] = [];
   laptopInfoForm: FormGroup;
-  laptopNameValid = true;
+  isSubmitAttempted: boolean = false;
   laptopImageValid = true;
-  laptopBrandIdValid = true;
-  laptopCpuValid = true;
-  laptopCPUCoresValid = true;
-  laptopCpuThreadsValid = true;
-  laptopRamValid = true;
-  laptopHardDriveValid = true;
-  laptopStateValid = true;
-  laptopPriceValid = true;
   showModal = false;
   data: any;
   constructor(
     private sanitizer: DomSanitizer,
     private router: Router,
     private generalsService: GeneralsService,
-    private route: ActivatedRoute,
-    private laptopService: LaptopsService
+    private route: ActivatedRoute
   ) {
     this.subs.push(
       this.generalsService.goback.subscribe(() => {
@@ -76,49 +66,31 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
     );
   }
 
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    this.previousPage();
+  }
+
   filesDropped(files: FileHandle[]): void {
     this.files = files;
-
     const file = files[0].file;
     const size = file.size / 1000000;
     this.imageSize = size.toFixed(1) + ' gb';
     this.imageName = file.name;
-
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      this.binaryString = reader.result + '';
-    };
-
-    reader.readAsBinaryString(file);
-
     this.laptopImageValid = true;
     this.showbutton = false;
   }
 
-  onChange(files: File[]) {
+  onChange(event: any) {
     this.files = [];
-    let validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
+    const files = event.target.files;
     const file = files[0];
-
     const url = this.sanitizer.bypassSecurityTrustUrl(
       window.URL.createObjectURL(file)
     );
+    console.log(url);
     const type = file.type;
-
-    if (validExtensions.includes(type)) {
-      this.files.push({ file, url, type });
-    } else {
-      this.laptopImageValid = false;
-      this.showbutton = true;
-      return;
-    }
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      this.binaryString = reader.result;
-      console.log(this.binaryString);
-    };
-    reader.readAsBinaryString(file);
+    this.files.push({ file, url, type });
 
     const size = file.size / 1000000;
     this.imageSize = size.toFixed(1) + ' gb';
@@ -164,7 +136,7 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
       hardDrive: this.laptopInfoForm.controls.LaptopHardDriveType.value,
       state: this.laptopInfoForm.controls.LaptopState.value,
       date: this.laptopInfoForm.controls.LaptopPurchaseDate.value,
-      price: this.laptopInfoForm.controls.LaptopPurchaseDate.value,
+      price: this.laptopInfoForm.controls.LaptopPrice.value,
     };
     console.log(myObj);
     sessionStorage.setItem('myData', JSON.stringify(myObj));
@@ -179,42 +151,18 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
 
   onSubmit($event: Event) {
     $event.preventDefault();
+    this.isSubmitAttempted = true;
 
-    if (this.laptopInfoForm.controls.laptopName.invalid) {
-      this.laptopNameValid = false;
-    }
     if (this.laptopInfoForm.controls.laptopImage.invalid) {
       this.laptopImageValid = false;
     }
-    if (this.laptopInfoForm.controls.laptopBrandId.invalid) {
-      this.laptopBrandIdValid = false;
+
+    if (this.laptopInfoForm.invalid || !this.laptopImageValid) {
+      return;
     }
-    if (this.laptopInfoForm.controls.laptopCPU.invalid) {
-      this.laptopCpuValid = false;
-    }
-    if (this.laptopInfoForm.controls.laptopCPUCores.invalid) {
-      this.laptopCPUCoresValid = false;
-    }
-    if (this.laptopInfoForm.controls.LaptopCpuThreads.invalid) {
-      this.laptopCpuThreadsValid = false;
-    }
-    if (this.laptopInfoForm.controls.LaptopRam.invalid) {
-      this.laptopRamValid = false;
-    }
-    if (this.laptopInfoForm.controls.LaptopHardDriveType.invalid) {
-      this.laptopHardDriveValid = false;
-    }
-    if (this.laptopInfoForm.controls.LaptopState.invalid) {
-      this.laptopStateValid = false;
-    }
-    if (this.laptopInfoForm.controls.LaptopPrice.invalid) {
-      this.laptopPriceValid = false;
-    }
-    console.log(this.laptopInfoForm);
-    // if (this.laptopInfoForm.invalid || !this.laptopImageValid) {
-    //   return;
-    // }
-    this.showModal = true;
+
+    // this.showModal = true;
+
     // const formAllInfo: FormAllInfo = {
     //   name: this.employeeInfo.firstName,
     //   surname: this.employeeInfo.lastName,
@@ -236,73 +184,9 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
     //   laptop_price: this.laptopInfoForm.value.LaptopPrice,
     // };
 
-    const formAllInfo: FormAllInfo = {
-      name: 'გელა',
-      surname: 'გელაშვილი',
-      team_id: 1,
-      position_id: 1,
-      phone_number: '+995595595959',
-      email: 'gela@redberry.ge',
-      token: this.token,
-      laptop_name: 'HP',
-      laptop_image: this.binaryString,
-      laptop_brand_id: 1,
-      laptop_cpu: 'Intel Core i3',
-      laptop_cpu_cores: 64,
-      laptop_cpu_threads: 128,
-      laptop_ram: 34,
-      laptop_hard_drive_type: 'HDD',
-      laptop_state: 'new',
-      laptop_purchase_date: '10-10-2023',
-      laptop_price: 1600,
-    };
-
     // this.laptopService.addLaptop(formAllInfo).subscribe((res) => {});
 
     sessionStorage.clear();
-  }
-
-  // openModal($event: Event) {
-  // $event.preventDefault();
-  // this.modal.toggleModal('auth');
-  // }
-  // openModal() {
-  //   this.router.navigate(['submitted']);
-  // }
-  turnValidLaptopName() {
-    this.laptopNameValid = true;
-  }
-
-  turnValidlaptopBrandId() {
-    this.laptopBrandIdValid = true;
-  }
-
-  turnValidlaptopCpu() {
-    this.laptopCpuValid = true;
-  }
-
-  turnValidlaptopCPUCores() {
-    this.laptopCPUCoresValid = true;
-  }
-
-  turnValidlaptopCpuThreads() {
-    this.laptopCpuThreadsValid = true;
-  }
-
-  turnValidLaptopRam() {
-    this.laptopRamValid = true;
-  }
-
-  turnValidlaptopHardDrive() {
-    this.laptopHardDriveValid = true;
-  }
-
-  turnValidLaptopState() {
-    this.laptopStateValid = true;
-  }
-
-  turnValidlaptopPrice() {
-    this.laptopPriceValid = true;
   }
 
   ngOnDestroy(): void {

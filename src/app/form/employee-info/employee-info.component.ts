@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Position, User } from '../../models/team.model';
@@ -15,12 +15,7 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
   positions: Position[] = [];
   subs: Subscription[] = [];
   employeeInfoForm: FormGroup;
-  firstNameValid = true;
-  lastNameValid = true;
-  teamsValid = true;
-  positionsValid = true;
-  emailValid = true;
-  phoneNumValid = true;
+  isSubmitAttempted: boolean = false;
   data: any;
 
   constructor(
@@ -34,6 +29,7 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
       })
     );
   }
+
   ngOnInit(): void {
     this.updateData();
     this.subs.push(
@@ -75,58 +71,17 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
   }
 
   nextPage() {
-    if (this.employeeInfoForm.controls.firstName.invalid) {
-      this.firstNameValid = false;
+    this.isSubmitAttempted = true;
+
+    if (this.employeeInfoForm.invalid) {
+      return;
     }
-    if (this.employeeInfoForm.controls.lastName.invalid) {
-      this.lastNameValid = false;
-    }
-    if (this.employeeInfoForm.controls.email.invalid) {
-      this.emailValid = false;
-    }
-    if (this.employeeInfoForm.controls.phoneNum.invalid) {
-      this.phoneNumValid = false;
-    }
-    if (this.employeeInfoForm.controls.team.invalid) {
-      this.teamsValid = false;
-    }
-    if (this.employeeInfoForm.controls.position.invalid) {
-      this.positionsValid = false;
-    }
-    // if (this.employeeInfoForm.invalid) {
-    //   return;
-    // }
 
     this.generalsService.formsubmitted.emit(true);
 
     this.router.navigate(['/forms/laptop'], {
       queryParams: { data: JSON.stringify(this.employeeInfoForm.value) },
     });
-  }
-
-  // turning validators true when typing starts
-
-  turnValidFirstName(event: Event) {
-    this.firstNameValid = true;
-  }
-
-  turnValidLastName() {
-    this.lastNameValid = true;
-  }
-
-  turnValidEmail() {
-    this.emailValid = true;
-  }
-
-  turnValidPhoneNum() {
-    this.phoneNumValid = true;
-  }
-
-  turnValidTeam() {
-    this.teamsValid = true;
-  }
-  turnValidPosition() {
-    this.positionsValid = true;
   }
 
   ngOnDestroy(): void {

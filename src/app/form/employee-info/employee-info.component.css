@@ -2,12 +2,17 @@ form {
   /* გასასწორებელია სიგანე უნდა დაემატოს და ფლექსზე გადაეწყოს */
   background: rgb(255, 255, 255);
   width: 1000px;
-  margin: 50px auto;
+  height: auto;
+  margin: 20px auto;
   max-width: 97%;
   border-radius: 8px;
   padding: 80px 100px 0px 100px;
 }
 
+.container {
+  height: auto;
+  display: flex;
+}
 .inpName {
   margin-right: 20px;
   margin-left: 20px;
@@ -39,10 +44,10 @@ select {
   border-color: transparent;
 }
 
-.inpName input:active,
+/* .inpName input:active,
 .inpName input:focus {
   border-color: #8ac0e2;
-}
+} */
 select:active,
 select:focus,
 select:hover {

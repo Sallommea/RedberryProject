@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container-form">
   <div class="btnImgWrapper" routerLink="/" (click)="mainPage()">
     <img src="assets/backforward.png" alt="goback" class="btnImg" />
   </div>
 
-  <div class="btnContainer">
+  <div class="button-container mt-5 pt-4">
     <div>
       <a
         routerLink="./"
@@ -18,11 +18,6 @@
       >
     </div>
   </div>
-
-  <div class="router">
-    <router-outlet> </router-outlet>
-  </div>
-  <div>
-    <img class="smallLogo" src="assets/LogoSmall.png" alt="smallLogo" />
-  </div>
+  <router-outlet> </router-outlet>
+  <img class="pb-3 pt-4" src="assets/LogoSmall.png" alt="smallLogo" />
 </div>

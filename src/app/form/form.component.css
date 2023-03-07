@@ -4,24 +4,25 @@ a {
   font-weight: 700;
 }
 
-.container {
-  /* background-color: #b33333; */
+.container-form {
   width: 100%;
   height: 100%;
+
   font-family: "HelveticaNeue";
   font-style: normal;
-
   font-size: 17px;
   line-height: 24px;
   color: #232323;
-}
-.router {
-  margin-top: 100px;
-}
-:host {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
   background-color: #f7f7f7;
+  position: relative;
+  overflow: scroll;
+  overflow-x: hidden;
 }
+
 .btnImgWrapper {
   position: absolute;
   width: 40px;
@@ -41,9 +42,8 @@ a {
   height: 11px;
 }
 
-.btnContainer {
-  position: relative;
-  top: 80px;
+.button-container {
+  margin: 0;
   display: flex;
   justify-content: center;
   cursor: pointer;

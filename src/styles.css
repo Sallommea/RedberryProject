@@ -4,3 +4,12 @@
   font-family: HelveticaNeue;
   src: url(assets/HelveticaNeue.ttc) format("truetype");
 }
+
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+}

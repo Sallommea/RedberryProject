@@ -1,0 +1,36 @@
+<div style="position: relative">
+  <label
+    class="mb-3 font-weight-bold"
+    [ngClass]="{ invalidInput: hasInputErrors() }"
+    ><ng-content select="[title]"></ng-content
+  ></label>
+  <input
+    type="{{ type }}"
+    class="form-control shadow-none mb-3"
+    placeholder="{{ placeholder }}"
+    [formControl]="control"
+    [ngClass]="{ invalid: hasInputErrors() }"
+  />
+  <span
+    *ngIf="!control?.errors?.['onlyGeorgianLetters'] || control?.errors?.['required'] && control?.errors?.['onlyGeorgianLetters']  "
+    class="hint"
+    select="hint"
+    [ngClass]="{ invalidInput: hasInputErrors() }"
+    ><ng-content></ng-content
+  ></span>
+  <span
+    class="hint invalidInput"
+    *ngIf="control?.errors?.['onlyGeorgianLetters'] && !control?.errors?.['required']"
+    >გამოიყენე ქართული ასოები</span
+  >
+  <ng-container
+    *ngIf="(control?.touched && control?.dirty) || isSubmitAttempted"
+  >
+    <span
+      class="txt-error"
+      *ngIf="control?.errors?.['email']"
+      class="text-danger text-sm"
+      >Invalid Email</span
+    >
+  </ng-container>
+</div>
