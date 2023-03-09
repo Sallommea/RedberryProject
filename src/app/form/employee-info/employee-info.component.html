@@ -1,22 +1,24 @@
-<div class="container">
+<div class="container bold">
   <form [formGroup]="employeeInfoForm">
-    <div class="row g-3">
-      <div class="col inpName">
+    <div class="row g-5 pb-4">
+      <div class="col-sm-12 col-md-6 col-lg-6 pb-4">
         <app-input
           placeholder="გრიშა"
           [control]="employeeInfoForm.controls.firstName"
           [isSubmitAttempted]="isSubmitAttempted"
+          [isMedium]="true"
         >
           <span title>სახელი</span>
           <span hint> მინიმუმ 2 სიმბოლო, ქართული ასოები</span></app-input
         >
       </div>
 
-      <div class="col inpName">
+      <div class="col-sm-12 col-md-6 col-lg-6 name">
         <app-input
           placeholder="ბაგრატიონი"
           [control]="employeeInfoForm.controls.lastName"
           [isSubmitAttempted]="isSubmitAttempted"
+          [isMedium]="true"
         >
           <span title>გვარი</span>
           <span hint> მინიმუმ 2 სიმბოლო, ქართული ასოები</span></app-input
@@ -24,7 +26,7 @@
       </div>
     </div>
     <div
-      class="row g-3 select"
+      class="row g-3 select mb-4 pb-4"
       [ngClass]="{
         invalid:
           (employeeInfoForm.controls.team.invalid &&
@@ -32,22 +34,24 @@
           (employeeInfoForm.controls.team.errors != null && isSubmitAttempted)
       }"
     >
-      <select
-        class="form-select form-select-sm shadow-none"
-        aria-label=".form-select-sm example"
-        formControlName="team"
-        placeholder="Select Username"
-        value=""
-      >
-        <option [value]="null" disabled>თიმი</option>
-        <option *ngFor="let team of teams" [value]="team.id">
-          {{ team.name }}
-        </option>
-      </select>
+      <div class="col">
+        <select
+          class="form-select form-select-sm shadow-none bold"
+          aria-label=".form-select-sm example"
+          formControlName="team"
+          placeholder="Select Username"
+          value=""
+        >
+          <option [value]="null" disabled>თიმი</option>
+          <option *ngFor="let team of teams" [value]="team.id">
+            {{ team.name }}
+          </option>
+        </select>
+      </div>
     </div>
 
     <div
-      class="row g-3 select"
+      class="row g-3 select mb-5"
       [ngClass]="{
         invalid:
           (employeeInfoForm.controls.position.invalid &&
@@ -56,18 +60,20 @@
             isSubmitAttempted)
       }"
     >
-      <select
-        class="form-select form-select-sm shadow-none"
-        aria-label=".form-select-sm example"
-        formControlName="position"
-      >
-        <option [value]="null" disabled>პოზიცია</option>
-        <option *ngFor="let position of positions" [value]="position.id">
-          {{ position.name }}
-        </option>
-      </select>
+      <div class="col">
+        <select
+          class="form-select form-select-sm shadow-none bold"
+          aria-label=".form-select-sm example"
+          formControlName="position"
+        >
+          <option [value]="null" disabled>პოზიცია</option>
+          <option *ngFor="let position of positions" [value]="position.id">
+            {{ position.name }}
+          </option>
+        </select>
+      </div>
     </div>
-    <div class="row g-3">
+    <div class="row g-3 mb-5">
       <div class="col inpName">
         <app-input
           placeholder="grish666@redberry.ge"
@@ -79,8 +85,8 @@
         >
       </div>
     </div>
-    <div class="row g-3 select">
-      <div class="col inpName">
+    <div class="row g-3 mb-5 pb-2">
+      <div class="col">
         <app-input
           placeholder="+995 598 00 07 01"
           [control]="employeeInfoForm.controls.phoneNum"
@@ -93,8 +99,8 @@
         >
       </div>
     </div>
-    <div class="row g-3 center">
-      <div class="col inpName btnWrap">
+    <div class="row">
+      <div class="btn-wrapper">
         <app-button type="button" (click)="nextPage()" class="submitBtn"
           >შემდეგი</app-button
         >

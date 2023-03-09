@@ -29,6 +29,7 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
   laptopImageValid = true;
   showModal = false;
   data: any;
+
   constructor(
     private sanitizer: DomSanitizer,
     private router: Router,

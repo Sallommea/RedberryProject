@@ -10,8 +10,7 @@ export class InputComponent implements OnInit {
   @Input() control: FormControl = new FormControl();
   @Input() placeholder: string = '';
   @Input() format: string = '';
-  @Input() isRounded: boolean = false;
-  @Input() isDisabled: boolean = false;
+  @Input() isMedium: boolean = false;
   @Input() isSubmitAttempted: boolean = false;
   @Input() isLarge: boolean = false;
   @Input() logError: boolean = false;
