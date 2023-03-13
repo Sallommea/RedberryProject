@@ -10,6 +10,7 @@
     placeholder="{{ placeholder }}"
     [formControl]="control"
     [ngClass]="{ invalid: hasInputErrors() }"
+    mask="{{ mask }}"
   />
   <span
     *ngIf="!control?.errors?.['onlyGeorgianLetters'] || control?.errors?.['required'] && control?.errors?.['onlyGeorgianLetters']  "

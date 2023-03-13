@@ -9,7 +9,7 @@ import { AbstractControl, FormControl } from '@angular/forms';
 export class InputComponent implements OnInit {
   @Input() control: FormControl = new FormControl();
   @Input() placeholder: string = '';
-  @Input() format: string = '';
+  @Input() mask: string = '';
   @Input() isMedium: boolean = false;
   @Input() isSubmitAttempted: boolean = false;
   @Input() isLarge: boolean = false;
@@ -23,6 +23,7 @@ export class InputComponent implements OnInit {
 
   hasInputErrors(): boolean {
     const control = this.control;
+    if (control.errors?.mask != undefined && !control.touched) return false;
 
     if (this.isSubmitAttempted && this.control.errors != null) return true;
     else if (

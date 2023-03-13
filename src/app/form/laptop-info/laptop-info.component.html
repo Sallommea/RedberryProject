@@ -1,6 +1,6 @@
 <div class="container bold">
   <form [formGroup]="laptopInfoForm" (ngSubmit)="onSubmit($event)">
-    <div class="row img-upload-container mb-5">
+    <div class="row img-upload-container">
       <div
         class="img-upload-box col-md-12 col-lg-12"
         appDragAndDrop
@@ -33,18 +33,18 @@
             accept=".png,.jpeg,.jpg"
             formControlName="laptopImage"
           />
-          <label class="submitBtn" for="file">ატვირთე</label>
+          <label class="button" for="file">ატვირთე</label>
         </div>
       </div>
 
-      <div *ngIf="!showbutton" class="row mt-3 pb-5 mb-5">
-        <div class="img_type col-lg-6 col-md-6 pb-3">
+      <div *ngIf="!showbutton" class="row mt-4">
+        <div class="img_type col-lg-6 col-md-6 no-padding-left">
           <img src="../../../assets/Vector.png" class="mr-1 vector-img" />
 
           <div class="mr-2 image_name">{{ imageName }},</div>
           <div class="image_name text-color">{{ imageSize }}</div>
         </div>
-        <div class="col-lg-6 col-md-6 upload">
+        <div class="col-lg-6 col-md-6 upload no-padding-right">
           <input
             type="file"
             name="file"
@@ -52,23 +52,24 @@
             (change)="onChange($event)"
             accept=".png,.jpeg,.jpg"
           />
-          <label class="upload_bottom" for="file">თავიდან ატვირთე</label>
+          <label class="button" for="file">თავიდან ატვირთე</label>
         </div>
       </div>
     </div>
-    <div class="row mt-5 mb-4">
-      <div class="laptop_name">
+    <div class="row mt-4">
+      <div class="no-padding-left col-sm-12 col-md-6 col-lg-6">
         <app-input
           placeholder="HP"
           [control]="laptopInfoForm.controls.laptopName"
           [isSubmitAttempted]="isSubmitAttempted"
+          [isMedium]="true"
         >
           <span title>ლეპტოპის სახელი</span>
           <span hint> ლათინური ასოები, ციფრები, !@#$%^&*()_+=</span></app-input
         >
       </div>
       <div
-        class="laptop_name"
+        class="no-padding-right col-sm-12 col-md-6 col-lg-6 display"
         [ngClass]="{
           invalid:
             (laptopInfoForm.controls.laptopBrandId.invalid &&
@@ -90,9 +91,9 @@
       </div>
     </div>
     <hr />
-    <div class="laptop_CPU_Info">
+    <div class="row">
       <div
-        class="laptop_CPU"
+        class="col-sm-12 col-md-4 col-lg-4"
         [ngClass]="{
           invalid:
             (laptopInfoForm.controls.laptopCPU.invalid &&
@@ -112,7 +113,7 @@
           </option>
         </select>
       </div>
-      <div class="laptop_CPU">
+      <div class="col-sm-12 col-md-4 col-lg-4">
         <app-input
           placeholder="14"
           type="number"
@@ -123,7 +124,7 @@
           <span hint> მხოლოდ ციფრები</span></app-input
         >
       </div>
-      <div class="laptop_CPU">
+      <div class="col-sm-12 col-md-4 col-lg-4">
         <app-input
           placeholder="365"
           type="number"
@@ -187,15 +188,14 @@
     <hr />
     <div class="laptop_info purchase_info mt-5">
       <div class="laptop_name">
-        <label>შეძენის რიცხვი (არჩევითი)</label>
-        <input
-          type="text"
-          class="form-control shadow-none"
+        <app-input
           placeholder="დდ / თთ / წწწწ"
-          aria-label="purschase date"
+          type="text"
+          [control]="laptopInfoForm.controls.LaptopPurchaseDate"
           mask="00/00/0000"
-          formControlName="LaptopPurchaseDate"
-        />
+        >
+          <span title>შეძენის რიცხვი (არჩევითი)</span>
+        </app-input>
       </div>
       <div class="laptop_name laptop_price">
         <app-input
@@ -248,7 +248,7 @@
     </div>
     <div class="buttons_row">
       <button class="go_back_button" (click)="previousPage()">უკან</button>
-      <button class="submit_button" type="submit">დამახსოვრება</button>
+      <button class="button submit_button" type="submit">დამახსოვრება</button>
     </div>
   </form>
 </div>

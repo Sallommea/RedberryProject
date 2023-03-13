@@ -3,29 +3,37 @@ form {
   margin: 20px auto;
   border-radius: 8px;
   padding: 60px 135px 60px 135px;
-  font-size: 17px;
+  font-size: 16px;
   font-style: normal;
+  font-family: "HelveticaNeue";
 }
 .container {
   width: 1000px;
 }
 
 .img-upload-container {
-  height: 400px;
   display: flex;
   justify-content: center;
 }
 
 .img-upload-box {
+  height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: "HelveticaNeue";
   font-size: 14px;
   background: #f7f7f7;
   border: 2px dashed #4386a9;
   border-radius: 18px;
+  padding: 0;
+}
+
+.no-padding-left {
+  padding-left: 0;
+}
+.no-padding-right {
+  padding-right: 0;
 }
 
 .background {
@@ -60,10 +68,6 @@ form {
   color: #4386a9;
 }
 
-.upload_button label {
-  font-weight: 300;
-}
-
 .img_type {
   display: flex;
   justify-content: flex-start;
@@ -87,24 +91,38 @@ form {
 .upload {
   display: flex;
   justify-content: flex-end;
-  padding: 0;
-}
-input {
-  padding-bottom: 12px;
-  padding-top: 12px;
-  border: 2px solid #8ac0e2;
+  align-items: center;
 }
 
+.button {
+  display: flex;
+  align-items: center;
+  padding: 8px 30px;
+  font-weight: 400;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+  background: #62a1eb;
+  border-radius: 8px;
+  color: #ffffff;
+  border: none;
+}
+
+.display {
+  display: flex;
+  align-items: center;
+}
+.display select {
+  margin-top: 10px;
+}
 select {
-  height: 45px;
+  padding: 16px 16px;
   background-color: #ebebeb;
   border-radius: 8px;
   outline: none;
   border: none;
   font-weight: 700;
-  font-family: "HelveticaNeue";
-  font-style: normal;
-  font-size: 15px;
+  font-size: 14px;
   border-color: transparent;
 }
 select:active,
@@ -113,28 +131,14 @@ select:hover {
   border-color: transparent;
   outline: none;
 }
-.laptop_name select {
-  width: 330px;
-}
-.laptop_name input {
-  width: 330px;
-}
 
 option {
   background: rgb(255, 255, 255);
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
 label {
-  font-weight: 700;
-  font-family: "HelveticaNeue";
-  font-style: normal;
   font-size: 16px;
   line-height: 40px;
-}
-
-button {
-  font-family: "HelveticaNeue";
-  font-size: 14px;
 }
 
 input[type="file"] {
@@ -162,81 +166,13 @@ input[type="radio"]:checked:before {
 input[type="radio"]:checked {
   border-color: #4386a9;
 }
-.memory_type {
-  margin-right: 80px;
-  margin-left: 20px;
-  font-weight: normal;
-}
-.submitBtn {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 18px 60px;
-  gap: 20px;
-  outline: none;
-  box-shadow: none;
-  width: 150px;
-  height: 50px;
-  cursor: pointer;
-  background: #62a1eb;
-  border-radius: 8px;
 
-  color: #ffffff;
-  border: none;
-
-  justify-content: center;
-  font-family: "HelveticaNeue";
-  font-style: normal;
-
-  font-size: 16px;
-}
-
-.laptop_info {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 700px;
-  font-weight: 700;
-  font-family: "HelveticaNeue";
-  font-style: normal;
-}
-.laptop_name {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-.laptop_CPU_Info {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 700px;
-  font-weight: 700;
-  font-family: "HelveticaNeue";
-  font-style: normal;
-}
-.laptop_CPU select,
-input {
-  width: 220px;
-}
-.hint {
-  color: #2e2e2eab;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 21px;
-  font-family: "HelveticaNeue";
-  font-style: normal;
-  margin-top: 8px;
-}
 hr {
   border: 1px solid #c7c7c7;
   clear: both;
   display: block;
-  width: 75%;
   height: 1px;
-  margin-top: -20px;
+  margin-top: 20px;
 }
 .radio_buttons {
   width: 330px;
@@ -247,41 +183,8 @@ hr {
   font-weight: 300;
 }
 
-.laptop_memory {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-
-  align-items: flex-start;
-  margin-top: -45px;
-}
-.laptop_price {
-  margin-top: 43px;
-}
-
-.purchase_info {
-  margin-top: -80px;
-}
 .submit_button {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 18px 60px;
-  gap: 20px;
-  outline: none;
-  box-shadow: none;
-  width: 200px;
-  height: 50px;
-  cursor: pointer;
-  background: #62a1eb;
-  border-radius: 8px;
-
-  color: #ffffff;
-  border: none;
-
-  justify-content: center;
-  font-family: "HelveticaNeue";
-  font-style: normal;
+  padding: 14px 30px;
 }
 .buttons_row {
   display: flex;
@@ -296,63 +199,16 @@ hr {
   border: none;
   cursor: pointer;
   color: rgba(98, 161, 235, 1);
-  font-size: 16px;
   letter-spacing: 0.08em;
   font-weight: 500;
 }
 
-.upload_bottom {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 15px 15px;
-  gap: 20px;
-  outline: none;
-  box-shadow: none;
-  width: 190px;
-  height: 50px;
-  cursor: pointer;
-  background: #62a1eb;
-  border-radius: 8px;
-
-  color: #ffffff;
-  border: none;
-
-  /* justify-content: center; */
-  font-family: "HelveticaNeue";
-  font-style: normal;
-
-  font-size: 16px;
-}
-.upload label {
-  font-weight: 300;
-  font-family: "HelveticaNeue";
-  font-style: normal;
-  font-size: 16px;
-  line-height: 10px;
-}
-
-.invalid label {
-  color: #e52f2f;
-}
 .invalidLabel {
   color: #e52f2f;
-}
-.invalid input {
-  border: 1.8px solid #e52f2f;
 }
 
 .invalid select {
   border: 1.8px solid #e52f2f;
-}
-.invalid p {
-  color: #e52f2f;
-}
-
-.invalid input:active,
-.invalid input:focus {
-  border-color: #e52f2f;
 }
 
 .invalidCon {
@@ -360,10 +216,6 @@ hr {
   border: 2px dashed rgba(229, 47, 47, 1);
 }
 
-.invalidParagraph {
-  font-weight: 600;
-  color: #e52f2f;
-}
 label img {
   height: auto;
   transform: scale(0.6);
