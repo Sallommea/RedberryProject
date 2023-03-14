@@ -67,7 +67,9 @@ form {
   font-size: 14px;
   color: #4386a9;
 }
-
+.row {
+  padding: 0;
+}
 .img_type {
   display: flex;
   justify-content: flex-start;
@@ -125,6 +127,7 @@ select {
   font-size: 14px;
   border-color: transparent;
 }
+
 select:active,
 select:focus,
 select:hover {
@@ -137,10 +140,18 @@ option {
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
 label {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 40px;
 }
-
+.label label {
+  line-height: 25px;
+  margin-top: 2px;
+}
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
 input[type="file"] {
   display: none;
 }
@@ -175,14 +186,26 @@ hr {
   margin-top: 20px;
 }
 .radio_buttons {
-  width: 330px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-
+.ml {
+  margin-left: 30px;
+  margin-top: 0;
+}
+.radio-button-container {
+  display: flex;
+}
 .radio_buttons label {
   margin-right: 60px;
   font-weight: 300;
+  font-size: 14px;
 }
 
+.label {
+  font-weight: 14px;
+}
 .submit_button {
   padding: 14px 30px;
 }

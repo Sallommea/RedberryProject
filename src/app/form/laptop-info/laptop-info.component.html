@@ -38,7 +38,7 @@
       </div>
 
       <div *ngIf="!showbutton" class="row mt-4">
-        <div class="img_type col-lg-6 col-md-6 no-padding-left">
+        <div class="img_type col-lg-6 col-md-6">
           <img src="../../../assets/Vector.png" class="mr-1 vector-img" />
 
           <div class="mr-2 image_name">{{ imageName }},</div>
@@ -90,10 +90,12 @@
         </select>
       </div>
     </div>
-    <hr />
+    <div class="row">
+      <hr />
+    </div>
     <div class="row">
       <div
-        class="col-sm-12 col-md-4 col-lg-4"
+        class="no-padding-left col-sm-12 col-md-4 col-lg-4 display"
         [ngClass]="{
           invalid:
             (laptopInfoForm.controls.laptopCPU.invalid &&
@@ -124,7 +126,7 @@
           <span hint> მხოლოდ ციფრები</span></app-input
         >
       </div>
-      <div class="col-sm-12 col-md-4 col-lg-4">
+      <div class="no-padding-right col-sm-12 col-md-4 col-lg-4">
         <app-input
           placeholder="365"
           type="number"
@@ -136,8 +138,8 @@
         >
       </div>
     </div>
-    <div class="laptop_info">
-      <div class="laptop_name">
+    <div class="row mt-4">
+      <div class="no-padding-left col-sm-12 col-md-6 col-lg-6">
         <app-input
           placeholder="16"
           type="number"
@@ -148,13 +150,14 @@
           <span hint> მხოლოდ ციფრები</span></app-input
         >
       </div>
-      <div class="laptop_memory">
+      <div class="label col-sm-12 col-md-6 col-lg-6 no-padding-right">
         <label
           [ngClass]="{
             invalidLabel:
               laptopInfoForm.controls.LaptopHardDriveType.errors != null &&
               isSubmitAttempted
           }"
+          class="ml"
         >
           მეხსიერების ტიპი
           <img
@@ -165,29 +168,35 @@
             src="../../../assets/uploadWarning.png"
             alt=""
         /></label>
-        <div class="radio_buttons">
-          <input
-            type="radio"
-            id="ssd"
-            value="SSD"
-            name="LaptopHardDriveType"
-            formControlName="LaptopHardDriveType"
-          />
-          <label for="ssd" class="memory_type">SSD</label>
-          <input
-            type="radio"
-            id="hdd"
-            value="HDD"
-            name="LaptopHardDriveType"
-            formControlName="LaptopHardDriveType"
-          />
-          <label for="hdd" class="memory_type">HDD</label>
+        <div class="ml radio-button-container">
+          <div class="radio_buttons">
+            <input
+              type="radio"
+              id="ssd"
+              value="SSD"
+              name="LaptopHardDriveType"
+              formControlName="LaptopHardDriveType"
+            />
+            <label for="ssd" class="memory_type">SSD</label>
+          </div>
+          <div class="radio_buttons">
+            <input
+              type="radio"
+              id="hdd"
+              value="HDD"
+              name="LaptopHardDriveType"
+              formControlName="LaptopHardDriveType"
+            />
+            <label for="hdd" class="memory_type">HDD</label>
+          </div>
         </div>
       </div>
     </div>
-    <hr />
-    <div class="laptop_info purchase_info mt-5">
-      <div class="laptop_name">
+    <div class="row">
+      <hr />
+    </div>
+    <div class="row mt-2">
+      <div class="no-padding-left col-sm-12 col-md-6 col-lg-6">
         <app-input
           placeholder="დდ / თთ / წწწწ"
           type="text"
@@ -197,7 +206,7 @@
           <span title>შეძენის რიცხვი (არჩევითი)</span>
         </app-input>
       </div>
-      <div class="laptop_name laptop_price">
+      <div class="no-padding-right col-sm-12 col-md-6 col-lg-6">
         <app-input
           placeholder="0000"
           type="number"
@@ -209,8 +218,8 @@
         >
       </div>
     </div>
-    <div class="laptop_info">
-      <div class="laptop_memory">
+    <div class="row mt-3">
+      <div class="label no-padding-left">
         <label
           [ngClass]="{
             invalidLabel:
@@ -246,9 +255,11 @@
         </div>
       </div>
     </div>
-    <div class="buttons_row">
-      <button class="go_back_button" (click)="previousPage()">უკან</button>
-      <button class="button submit_button" type="submit">დამახსოვრება</button>
+    <div class="row mt-5">
+      <div class="no-padding-left no-padding-right buttons_row">
+        <button class="go_back_button" (click)="previousPage()">უკან</button>
+        <button class="button submit_button" type="submit">დამახსოვრება</button>
+      </div>
     </div>
   </form>
 </div>

@@ -10,7 +10,7 @@ input {
 }
 
 label {
-  font-size: 15px;
+  font-size: 14px;
 }
 .invalidInput {
   color: #e52f2f;
