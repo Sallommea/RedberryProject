@@ -151,15 +151,16 @@
         >
       </div>
       <div class="label col-sm-12 col-md-6 col-lg-6 no-padding-right">
-        <label
-          [ngClass]="{
-            invalidLabel:
-              laptopInfoForm.controls.LaptopHardDriveType.errors != null &&
-              isSubmitAttempted
-          }"
-          class="ml"
-        >
-          მეხსიერების ტიპი
+        <div class="radio--button-container label-container ml">
+          <label
+            [ngClass]="{
+              invalidLabel:
+                laptopInfoForm.controls.LaptopHardDriveType.errors != null &&
+                isSubmitAttempted
+            }"
+          >
+            მეხსიერების ტიპი
+          </label>
           <img
             *ngIf="
               laptopInfoForm.controls.LaptopHardDriveType.errors != null &&
@@ -167,8 +168,9 @@
             "
             src="../../../assets/uploadWarning.png"
             alt=""
-        /></label>
-        <div class="ml radio-button-container">
+          />
+        </div>
+        <div class="ml radio--button-container position-absolute">
           <div class="radio_buttons">
             <input
               type="radio"
@@ -218,44 +220,51 @@
         >
       </div>
     </div>
-    <div class="row mt-3">
-      <div class="label no-padding-left">
-        <label
-          [ngClass]="{
-            invalidLabel:
-              laptopInfoForm.controls.LaptopState.errors != null &&
-              isSubmitAttempted
-          }"
-        >
-          ლეპტოპის მდგომარეობა
+    <div class="row mt-3" style="height: 109px">
+      <div class="label col-sm-12 col-md-6 col-lg-6 no-padding-left">
+        <div class="radio--button-container label-container">
+          <label
+            [ngClass]="{
+              invalidLabel:
+                laptopInfoForm.controls.LaptopState.errors != null &&
+                isSubmitAttempted
+            }"
+          >
+            ლეპტოპის მდგომარეობა
+          </label>
           <img
             *ngIf="
               laptopInfoForm.controls.LaptopState.errors != null &&
               isSubmitAttempted
             "
             src="../../../assets/uploadWarning.png"
-        /></label>
-        <div class="radio_buttons">
-          <input
-            type="radio"
-            id="new"
-            value="ახალი"
-            name="LaptopState"
-            formControlName="LaptopState"
           />
-          <label for="new" class="memory_type">ახალი</label>
-          <input
-            type="radio"
-            id="old"
-            value="მეორადი"
-            name="LaptopState"
-            formControlName="LaptopState"
-          />
-          <label for="old" class="memory_type">მეორადი</label>
+        </div>
+        <div class="radio--button-container position-absolute">
+          <div class="radio_buttons">
+            <input
+              type="radio"
+              id="new"
+              value="ახალი"
+              name="LaptopState"
+              formControlName="LaptopState"
+            />
+            <label for="new" class="memory_type">ახალი</label>
+          </div>
+          <div class="radio_buttons">
+            <input
+              type="radio"
+              id="old"
+              value="მეორადი"
+              name="LaptopState"
+              formControlName="LaptopState"
+            />
+            <label for="old" class="memory_type">მეორადი</label>
+          </div>
         </div>
       </div>
     </div>
-    <div class="row mt-5">
+    <div class="row mt-3">
       <div class="no-padding-left no-padding-right buttons_row">
         <button class="go_back_button" (click)="previousPage()">უკან</button>
         <button class="button submit_button" type="submit">დამახსოვრება</button>

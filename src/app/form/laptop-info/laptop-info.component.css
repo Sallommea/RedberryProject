@@ -143,15 +143,14 @@ label {
   font-size: 14px;
   line-height: 40px;
 }
-.label label {
-  line-height: 25px;
-  margin-top: 2px;
+hr {
+  border: 1px solid #c7c7c7;
+  clear: both;
+  display: block;
+  height: 1px;
+  margin-top: 20px;
 }
-.label {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
+
 input[type="file"] {
   display: none;
 }
@@ -178,44 +177,58 @@ input[type="radio"]:checked {
   border-color: #4386a9;
 }
 
-hr {
-  border: 1px solid #c7c7c7;
-  clear: both;
-  display: block;
-  height: 1px;
-  margin-top: 20px;
+.label label {
+  line-height: 15px;
+  margin-top: 2px;
 }
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-weight: 14px;
+  position: relative;
+}
+
+.ml {
+  margin-left: 30px;
+}
+
+.radio--button-container {
+  margin-top: 5px;
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.label-container img {
+  height: 20px;
+}
+
 .radio_buttons {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.ml {
-  margin-left: 30px;
-  margin-top: 0;
-}
-.radio-button-container {
+
+.position-absolute {
+  position: absolute;
   display: flex;
+  gap: 50px;
+  top: 50%;
+  transform: translate(0%, -50%);
 }
 .radio_buttons label {
-  margin-right: 60px;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 14px;
 }
 
-.label {
-  font-weight: 14px;
-}
 .submit_button {
   padding: 14px 30px;
 }
 .buttons_row {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  justify-items: flex-start;
   align-items: center;
-  width: 700px;
 }
 .go_back_button {
   background: rgb(255, 255, 255);
@@ -237,10 +250,4 @@ hr {
 .invalidCon {
   background: #fff1f1;
   border: 2px dashed rgba(229, 47, 47, 1);
-}
-
-label img {
-  height: auto;
-  transform: scale(0.6);
-  margin-bottom: 10px;
 }
