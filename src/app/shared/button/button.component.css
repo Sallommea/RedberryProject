@@ -4,18 +4,13 @@
   padding: 18px 60px;
   outline: none;
   box-shadow: none;
-
-  height: 60px;
   cursor: pointer;
   background: #62a1eb;
   border-radius: 8px;
-
   color: #ffffff;
   border: none;
-
   justify-content: center;
   font-family: "HelveticaNeue";
   font-style: normal;
-
   font-size: 16px;
 }
