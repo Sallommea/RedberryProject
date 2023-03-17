@@ -1,7 +1,7 @@
 .button {
   display: flex;
   align-items: center;
-  padding: 18px 60px;
+  padding: 18px 40px;
   outline: none;
   box-shadow: none;
   cursor: pointer;

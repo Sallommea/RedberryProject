@@ -7,7 +7,6 @@ a {
 .container-form {
   width: 100%;
   height: 100%;
-
   font-family: "HelveticaNeue";
   font-style: normal;
   font-size: 17px;
@@ -44,6 +43,7 @@ a {
 
 .button-container {
   margin: 0;
+  margin-top: 70px;
   display: flex;
   justify-content: center;
   cursor: pointer;
@@ -68,7 +68,6 @@ a {
   content: "";
   height: 2px;
   bottom: -8px;
-
   margin: 0 auto;
   left: 0;
   right: 0;
@@ -80,4 +79,28 @@ a {
   -moz-transition: 0.5s;
   -webkit-transition: 0.5s;
   transition: 0.5s;
+}
+
+@media (max-width: 696px) {
+  .btnImgWrapper {
+    left: 5px;
+    top: 32px;
+    background: transparent;
+  }
+  .button-container {
+    margin-top: 40px;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .noDisplay {
+    display: none;
+  }
+  .active:after {
+    background-color: transparent;
+  }
+  .small-logo {
+    display: none;
+  }
 }

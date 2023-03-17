@@ -1,3 +1,7 @@
-<button [type]="type" class="button" [ngStyle]="{ width: width }">
+<button
+  [type]="type"
+  class="button"
+  [ngStyle]="{ width: btnBlock ? '100%' : 'auto' }"
+>
   <ng-content></ng-content>
 </button>

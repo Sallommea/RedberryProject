@@ -11,7 +11,7 @@ a {
   font-family: "HelveticaNeue";
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   color: white;
   text-decoration: none;
 }
@@ -42,6 +42,7 @@ a {
   justify-content: center;
   align-items: center;
   padding-top: 30px;
+  width: 350px;
 }
 
 @media (max-height: 650px) and (min-width: 700px) {
@@ -59,5 +60,11 @@ a {
   .btn-container {
     margin-top: 10px;
     padding-top: 0;
+  }
+}
+
+@media (max-width: 280px) {
+  .btn-container {
+    width: 280px;
   }
 }

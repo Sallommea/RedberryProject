@@ -3,21 +3,29 @@
     <img src="assets/backforward.png" alt="goback" class="btnImg" />
   </div>
 
-  <div class="button-container mt-5 pt-4">
-    <div>
+  <div class="button-container">
+    <div class="col-md-12 col-lg-12">
       <a
         routerLink="./"
         class="button"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
         (click)="previous()"
+        [ngClass]="{ noDisplay: activated }"
         >თანამშრომლის ინფო</a
       >
-      <a (click)="nextpage()" [ngClass]="{ active: activated }" class="button"
+      <a
+        (click)="nextpage()"
+        [ngClass]="{ active: activated }"
+        class="button {{ !activated ? 'noDisplay' : '' }}"
         >ლეპტოპის მახასიათებლები</a
       >
     </div>
   </div>
   <router-outlet> </router-outlet>
-  <img class="pb-3 pt-4" src="assets/LogoSmall.png" alt="smallLogo" />
+  <img
+    class="pb-3 pt-4 small-logo"
+    src="assets/LogoSmall.png"
+    alt="smallLogo"
+  />
 </div>

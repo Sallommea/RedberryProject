@@ -4,11 +4,11 @@ form {
   border-radius: 8px;
   padding: 60px 100px 0px 100px;
 
-  font-size: 17px;
+  font-size: 16px;
   font-style: normal;
 }
 .container {
-  width: 1000px;
+  width: 950px;
 }
 select {
   padding: 15px 16px;
@@ -17,7 +17,7 @@ select {
 
   outline: none;
   border: none;
-  font-size: 15px;
+  font-size: 14px;
   border-color: transparent;
 }
 
@@ -51,5 +51,11 @@ select option {
   }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 576px) {
+  .container {
+    width: auto;
+  }
+  form {
+    padding: 20px 30px 0px 30px;
+  }
 }

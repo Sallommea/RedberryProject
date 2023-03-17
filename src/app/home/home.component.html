@@ -7,11 +7,11 @@
       <img class="frame-img" src="assets/Frame.png" alt="frame" />
     </div>
     <div class="row btn-container pb-5">
-      <app-button routerLink="/forms" [width]="'330px'">
-        <a routerLink="/forms">ᲩᲐᲜᲐᲬᲔᲠᲘᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ</a>
+      <app-button routerLink="/forms" [btnBlock]="true">
+        <a>ᲩᲐᲜᲐᲬᲔᲠᲘᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ</a>
       </app-button>
-      <app-button [width]="'330px'">
-        <a [routerLink]="['/list']">ᲩᲐᲜᲐᲬᲔᲠᲔᲑᲘᲡ ᲡᲘᲐ</a></app-button
+      <app-button [routerLink]="['/list']" [btnBlock]="true">
+        <a>ᲩᲐᲜᲐᲬᲔᲠᲔᲑᲘᲡ ᲡᲘᲐ</a></app-button
       >
     </div>
   </div>
