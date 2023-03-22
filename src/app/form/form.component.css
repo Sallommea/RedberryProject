@@ -22,25 +22,6 @@ a {
   overflow-x: hidden;
 }
 
-.btnImgWrapper {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  left: 70px;
-  cursor: pointer;
-  top: 40px;
-  background: #d9d9d9;
-}
-
-.btnImg {
-  width: 7.21px;
-  height: 11px;
-}
-
 .button-container {
   margin: 0;
   margin-top: 70px;

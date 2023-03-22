@@ -154,15 +154,15 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
     $event.preventDefault();
     this.isSubmitAttempted = true;
 
-    if (this.laptopInfoForm.controls.laptopImage.invalid) {
-      this.laptopImageValid = false;
-    }
+    // if (this.laptopInfoForm.controls.laptopImage.invalid) {
+    //   this.laptopImageValid = false;
+    // }
 
-    if (this.laptopInfoForm.invalid || !this.laptopImageValid) {
-      return;
-    }
+    // if (this.laptopInfoForm.invalid || !this.laptopImageValid) {
+    //   return;
+    // }
 
-    // this.showModal = true;
+    this.showModal = true;
 
     // const formAllInfo: FormAllInfo = {
     //   name: this.employeeInfo.firstName,

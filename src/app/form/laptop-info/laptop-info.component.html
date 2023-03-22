@@ -57,19 +57,23 @@
       </div>
     </div>
     <div class="row mt-4">
-      <div class="no-padding-left col-sm-12 col-md-6 col-lg-6">
-        <app-input
-          placeholder="HP"
-          [control]="laptopInfoForm.controls.laptopName"
-          [isSubmitAttempted]="isSubmitAttempted"
-          [isMedium]="true"
-        >
-          <span title>ლეპტოპის სახელი</span>
-          <span hint> ლათინური ასოები, ციფრები, !@#$%^&*()_+=</span></app-input
-        >
+      <div class="no-padding-left col-sm-12 col-md-6 col-lg-6 no-padding mb">
+        <div>
+          <app-input
+            placeholder="HP"
+            [control]="laptopInfoForm.controls.laptopName"
+            [isSubmitAttempted]="isSubmitAttempted"
+            [isMedium]="true"
+          >
+            <span title>ლეპტოპის სახელი</span>
+            <span hint>
+              ლათინური ასოები, ციფრები, !@#$%^&*()_+=</span
+            ></app-input
+          >
+        </div>
       </div>
       <div
-        class="no-padding-right col-sm-12 col-md-6 col-lg-6 display"
+        class="no-padding-right col-sm-12 col-md-6 col-lg-6 display no-padding"
         [ngClass]="{
           invalid:
             (laptopInfoForm.controls.laptopBrandId.invalid &&
@@ -95,7 +99,7 @@
     </div>
     <div class="row">
       <div
-        class="no-padding-left col-sm-12 col-md-4 col-lg-4 display"
+        class="no-padding-left col-sm-12 col-md-4 col-lg-4 display no-padding mb-26"
         [ngClass]="{
           invalid:
             (laptopInfoForm.controls.laptopCPU.invalid &&
@@ -115,7 +119,7 @@
           </option>
         </select>
       </div>
-      <div class="col-sm-12 col-md-4 col-lg-4">
+      <div class="col-sm-12 col-md-4 col-lg-4 no-padding mb-26">
         <app-input
           placeholder="14"
           type="number"
@@ -126,7 +130,7 @@
           <span hint> მხოლოდ ციფრები</span></app-input
         >
       </div>
-      <div class="no-padding-right col-sm-12 col-md-4 col-lg-4">
+      <div class="no-padding-right col-sm-12 col-md-4 col-lg-4 no-padding">
         <app-input
           placeholder="365"
           type="number"
@@ -139,7 +143,7 @@
       </div>
     </div>
     <div class="row mt-4">
-      <div class="no-padding-left col-sm-12 col-md-6 col-lg-6">
+      <div class="no-padding-left col-sm-12 col-md-6 col-lg-6 no-padding mb-26">
         <app-input
           placeholder="16"
           type="number"
@@ -150,7 +154,9 @@
           <span hint> მხოლოდ ციფრები</span></app-input
         >
       </div>
-      <div class="label col-sm-12 col-md-6 col-lg-6 no-padding-right">
+      <div
+        class="label col-sm-12 col-md-6 col-lg-6 no-padding-right no-padding height"
+      >
         <div class="radio--button-container label-container ml">
           <label
             [ngClass]="{
@@ -194,11 +200,11 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row hr">
       <hr />
     </div>
     <div class="row mt-2">
-      <div class="no-padding-left col-sm-12 col-md-6 col-lg-6">
+      <div class="no-padding-left col-sm-12 col-md-6 col-lg-6 no-padding mb-26">
         <app-input
           placeholder="დდ / თთ / წწწწ"
           type="text"
@@ -208,7 +214,7 @@
           <span title>შეძენის რიცხვი (არჩევითი)</span>
         </app-input>
       </div>
-      <div class="no-padding-right col-sm-12 col-md-6 col-lg-6">
+      <div class="no-padding-right col-sm-12 col-md-6 col-lg-6 no-padding">
         <app-input
           placeholder="0000"
           type="number"
@@ -232,6 +238,7 @@
           >
             ლეპტოპის მდგომარეობა
           </label>
+
           <img
             *ngIf="
               laptopInfoForm.controls.LaptopState.errors != null &&

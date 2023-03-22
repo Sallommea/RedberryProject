@@ -1,44 +1,43 @@
 <div class="container">
-  <div class="btnImgWrapper" routerLink="/">
-    <img src="assets/backforward.png" alt="goback" class="btnImg" />
-  </div>
+  <app-on-main-page class="btn-back" routerLink="/"></app-on-main-page>
+
   <div class="container">
-    <div class="btnContainer">
-      <h4>ᲚᲔᲞᲢᲝᲞᲘᲡ ᲘᲜᲤᲝ</h4>
+    <div class="row">
+      <div class="btnContainer">
+        <h4>ᲚᲔᲞᲢᲝᲞᲘᲡ ᲘᲜᲤᲝ</h4>
+      </div>
     </div>
-    <div class="containerUpperPart mt-5 pt-5">
-      <div class="mt-4">
+    <div class="row">
+      <div class="col-md-6 col-lg-6 col-sm-12">
         <img src="assets/laptop1.png" alt="" />
       </div>
+      <div class="col-md-6 col-lg-6 col-sm-12">
+        <table class="table mt-3">
+          <tr>
+            <th>სახელი:</th>
+            <th>თიმი:</th>
+            <th>პოზიცია:</th>
+            <th>მეილი:</th>
+            <th>ტელ. ნომერი:</th>
+          </tr>
 
-      <table class="table mt-4">
-        <tr>
-          <th>სახელი:</th>
-          <th>თიმი:</th>
-          <th>პოზიცია:</th>
-          <th>მეილი:</th>
-          <th>ტელ. ნომერი:</th>
-        </tr>
-
-        <tr>
-          <td>
-            {{ laptop?.data?.user.name }} {{ laptop?.data?.user.surname }}
-          </td>
-          <td>{{ team }}</td>
-          <td>{{ position }}</td>
-          <td>{{ laptop?.data?.user.email }}</td>
-          <td>
-            {{ laptop?.data?.user.phone_number }}
-          </td>
-        </tr>
-      </table>
+          <tr>
+            <td>
+              {{ laptop?.data?.user.name }} {{ laptop?.data?.user.surname }}
+            </td>
+            <td>{{ team }}</td>
+            <td>{{ position }}</td>
+            <td>{{ laptop?.data?.user.email }}</td>
+            <td>
+              {{ laptop?.data?.user.phone_number }}
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
-
-    <div class="containerUpperPart mt-5"><hr class="hr" /></div>
-
-    <div class="containerUpperPart">
-      <div class="mt-4">
-        <table class="table" style="width: 460px">
+    <div class="row">
+      <div class="mt-4 col-md-6 col-lg-6 col-sm-12">
+        <table class="table">
           <tr>
             <th>ლეპტოპის სახელი:</th>
             <th>ლეპტოპის ბრენდი:</th>
@@ -56,7 +55,7 @@
           </tr>
         </table>
       </div>
-      <div class="mt-4">
+      <div class="col-md-6 col-lg-6 mt-4 col-sm-12">
         <table class="table">
           <tr>
             <th>CPU:</th>
@@ -74,10 +73,9 @@
         </table>
       </div>
     </div>
-    <div class="containerUpperPart mt-5"><hr class="hr" /></div>
-    <div class="containerUpperPart">
-      <div class="mt-4">
-        <table class="table" style="width: 460px">
+    <div class="row">
+      <div class="col-md-6 col-lg-6 mt-4">
+        <table class="table">
           <tr>
             <th>ლეპტოპის მდგომარეობა:</th>
             <th>ლეპტოპის ფასი:</th>
@@ -89,7 +87,7 @@
           </tr>
         </table>
       </div>
-      <div class="mt-4">
+      <div class="col-md-6 col-lg-6 mt-4 col-sm-12">
         <table class="table">
           <tr>
             <th>შეძენის რიცხვი:</th>

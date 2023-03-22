@@ -1,7 +1,9 @@
 <div class="container-form">
-  <div class="btnImgWrapper" routerLink="/" (click)="mainPage()">
+  <!-- <div class="btnImgWrapper" routerLink="/" (click)="mainPage()">
     <img src="assets/backforward.png" alt="goback" class="btnImg" />
-  </div>
+  </div> -->
+
+  <app-on-main-page routerLink="/" (onMainPage)="mainPage()"></app-on-main-page>
 
   <div class="button-container">
     <div class="col-md-12 col-lg-12">

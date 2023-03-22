@@ -5,20 +5,24 @@ h4 {
 }
 
 img {
-  width: 460px;
-  height: 272px;
+  max-width: 90%;
+  height: auto;
 }
 
-/* .table thead {
-  display: none;
-} */
+.btnContainer {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 40px;
+}
+
 .table {
-  width: 400px;
+  max-width: 400px;
   font-family: "HelveticaNeue";
   font-weight: 500;
   font-size: 18px;
 }
-/* single-row column design */
+
 tr {
   display: block;
   float: left;
@@ -37,54 +41,42 @@ td {
   color: #797979;
 }
 
-hr {
+/* hr {
   border: 1px solid #a5a5a5;
   margin-left: 100px;
-}
-
-.hr {
-  width: 80%;
-}
-/* border-collapse */
-/* tr > *:not(:first-child) {
-  border-top: 0;
-}
-tr:not(:first-child) > * {
-  border-left: 0;
 } */
-.right {
-  width: 400px;
+
+@media (max-width: 992px) {
+  .table {
+    font-size: 14px;
+  }
+  img {
+    height: 100%;
+    max-width: 100%;
+  }
 }
 
-.btnImg {
-  width: 7.21px;
-  height: 11px;
+@media (max-width: 768px) {
+  .btn-back {
+    position: absolute;
+    margin-top: -24px;
+  }
+  img {
+    max-width: 100%;
+  }
+  h4 {
+    font-size: 16px;
+  }
+  .btnContainer {
+    margin-top: 20px;
+  }
 }
 
-.containerUpperPart {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 60px;
-}
-.btnImgWrapper {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  left: 70px;
-  cursor: pointer;
-  top: 40px;
-  background: #d9d9d9;
-}
-
-.btnContainer {
-  position: relative;
-  top: 70px;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
+@media (max-width: 282px) {
+  th {
+    margin-right: 1rem;
+  }
+  .table {
+    font-size: 10px;
+  }
 }
