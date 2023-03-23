@@ -10,7 +10,6 @@ import { GeneralsService } from '../services/generals.service';
 export class FormComponent implements OnInit, OnDestroy {
   subs: Subscription[] = [];
   activated = false;
-  activated2 = false;
   constructor(private generalsService: GeneralsService, private route: Router) {
     this.generalsService.formsubmitted.subscribe((status: boolean) => {
       this.activated = status;

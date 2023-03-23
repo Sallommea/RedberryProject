@@ -89,7 +89,6 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
     const url = this.sanitizer.bypassSecurityTrustUrl(
       window.URL.createObjectURL(file)
     );
-    console.log(url);
     const type = file.type;
     this.files.push({ file, url, type });
 
@@ -139,7 +138,7 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
       date: this.laptopInfoForm.controls.LaptopPurchaseDate.value,
       price: this.laptopInfoForm.controls.LaptopPrice.value,
     };
-    console.log(myObj);
+
     sessionStorage.setItem('myData', JSON.stringify(myObj));
     this.router.navigate(['forms'], {
       state: {
@@ -154,13 +153,13 @@ export class LaptopInfoComponent implements OnInit, OnDestroy {
     $event.preventDefault();
     this.isSubmitAttempted = true;
 
-    // if (this.laptopInfoForm.controls.laptopImage.invalid) {
-    //   this.laptopImageValid = false;
-    // }
+    if (this.laptopInfoForm.controls.laptopImage.invalid) {
+      this.laptopImageValid = false;
+    }
 
-    // if (this.laptopInfoForm.invalid || !this.laptopImageValid) {
-    //   return;
-    // }
+    if (this.laptopInfoForm.invalid || !this.laptopImageValid) {
+      return;
+    }
 
     this.showModal = true;
 

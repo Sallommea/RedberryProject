@@ -41,10 +41,10 @@ td {
   color: #797979;
 }
 
-/* hr {
+hr {
   border: 1px solid #a5a5a5;
-  margin-left: 100px;
-} */
+  /* margin-left: 100px; */
+}
 
 @media (max-width: 992px) {
   .table {

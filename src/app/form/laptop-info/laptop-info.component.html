@@ -2,10 +2,11 @@
   <form [formGroup]="laptopInfoForm" (ngSubmit)="onSubmit($event)">
     <div class="row img-upload-container">
       <div
-        class="img-upload-box col-md-12 col-lg-12"
+        class="img-upload-box col-md-12 col-lg-12 {{
+          !showbutton ? 'background' : ''
+        }}"
         appDragAndDrop
         (files)="filesDropped($event)"
-        [ngClass]="{ background: !showbutton }"
         [ngClass]="{ invalidCon: !laptopImageValid }"
       >
         <img
@@ -88,7 +89,7 @@
           formControlName="laptopBrandId"
         >
           <option value="null" disabled>ლეპტოპის ბრენდი</option>
-          <option value="1" *ngFor="let brand of brands">
+          <option [value]="brand.id" *ngFor="let brand of brands">
             {{ brand.name }}
           </option>
         </select>
@@ -114,7 +115,7 @@
           formControlName="laptopCPU"
         >
           <option disabled value="null">CPU</option>
-          <option value="1" *ngFor="let cpu of cpus">
+          <option [value]="cpu.name" *ngFor="let cpu of cpus">
             {{ cpu.name }}
           </option>
         </select>

@@ -13,17 +13,22 @@ export class InputComponent implements OnInit {
   @Input() isMedium: boolean = false;
   @Input() isSubmitAttempted: boolean = false;
   @Input() isLarge: boolean = false;
-  @Input() logError: boolean = false;
   @Input() type: string = 'text';
-  @Input() customErrorTextForPattern: string = '';
-  @Input() disableAutocomplete = false;
+
   constructor() {}
 
   ngOnInit(): void {}
 
   hasInputErrors(): boolean {
     const control = this.control;
+
     if (control.errors?.mask != undefined && !control.touched) return false;
+
+    if (control.errors?.georgianNum != undefined && !control.touched)
+      return false;
+
+    if (control.errors?.emailRedberry != undefined && !control.touched)
+      return false;
 
     if (this.isSubmitAttempted && this.control.errors != null) return true;
     else if (

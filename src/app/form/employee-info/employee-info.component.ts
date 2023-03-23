@@ -73,9 +73,9 @@ export class EmployeeInfoComponent implements OnInit, OnDestroy {
   nextPage() {
     this.isSubmitAttempted = true;
 
-    // if (this.employeeInfoForm.invalid) {
-    //   return;
-    // }
+    if (this.employeeInfoForm.invalid) {
+      return;
+    }
 
     this.generalsService.formsubmitted.emit(true);
 
